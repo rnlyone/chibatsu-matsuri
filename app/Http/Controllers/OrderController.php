@@ -196,38 +196,24 @@ class OrderController extends Controller
 
     public function midtrans_response(Request $request)
     {
-        $data = (object) $_GET;
-        $order_id = $data->order_id;
-
-        $string = $order_id;
+        $string = $request->input('order_id');;
         $array = explode("-", $string);
         $result = $array[1];
+        $orderId = $result;
+        $status = $request->input('transaction_status');
+        $order = Order::findOrFail($orderId);
 
-        // get transaction status from request
-        $transactionStatus = $data->transaction_status;
-
-        // get order from database
-        $order = Order::find($result);
-
-        if ($transactionStatus == 'capture') {
-            // update order status to 'sukses' if transaction is captured
+        if ($status == 'capture' || $status == 'settlement') {
             $order->status_bayar = 'sukses';
-            $order->save();
-        } elseif ($transactionStatus == 'settlement') {
-            // update order status to 'sukses' if transaction is settled
-            $order->status_bayar = 'sukses';
-            $order->save();
-        } elseif ($transactionStatus == 'pending') {
-            // update order status to 'sukses' if transaction is settled
+        } else if ($status == 'pending') {
             $order->status_bayar = 'pending';
-            $order->save();
-        } elseif ($transactionStatus == 'cancel' || $transactionStatus == 'deny' || $transactionStatus == 'expire') {
-            // update order status to 'gagal' if transaction is cancelled, denied, or expired
+        } else {
             $order->status_bayar = 'gagal';
-            $order->save();
         }
 
-        return response(200);
+        $order->save();
+
+        return response()->json(['status' => 'success']);
     }
 
     public function finishedpayment(Request $request)
