@@ -196,6 +196,7 @@ class OrderController extends Controller
 
     public function midtrans_response(Request $request)
     {
+        dd($_GET);
         $payload = $request->getContent();
         $data = json_decode($payload);
         $order_id = $data->order_id;
@@ -204,21 +205,24 @@ class OrderController extends Controller
         $array = explode("-", $string);
         $result = $array[1];
 
-        $tix = Order::find($result);
+        // get transaction status from request
+        $transactionStatus = $request->input('transaction_status');
 
-        if ($data->status_code == '200' && $data->transaction_status == 'capture') {
-            $order = Order::where('id', $data->order_id)->first();
+        // get order from database
+        $order = Order::find($result);
 
-            if ($order) {
-                // Update status pembayaran menjadi sukses
-                $order->status_bayar = 'sukses';
-                $order->save();
-
-
-                return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
-                // // Kirim email konfirmasi ke customer
-                // Mail::to($order->email)->send(new OrderConfirmationMail($order));
-            }
+        if ($transactionStatus == 'capture') {
+            // update order status to 'sukses' if transaction is captured
+            $order->status_bayar = 'sukses';
+            $order->save();
+        } elseif ($transactionStatus == 'settlement') {
+            // update order status to 'sukses' if transaction is settled
+            $order->status_bayar = 'sukses';
+            $order->save();
+        } elseif ($transactionStatus == 'cancel' || $transactionStatus == 'deny' || $transactionStatus == 'expire') {
+            // update order status to 'gagal' if transaction is cancelled, denied, or expired
+            $order->status_bayar = 'gagal';
+            $order->save();
         }
 
         return response('OK', 200);
@@ -226,6 +230,7 @@ class OrderController extends Controller
 
     public function finishedpayment(Request $request)
     {
+        dd($_GET);
         $payload = $request->getContent();
         $data = json_decode($payload);
         $order_id = $data->order_id;
@@ -243,9 +248,6 @@ class OrderController extends Controller
                 // Update status pembayaran menjadi sukses
                 $order->status_bayar = 'sukses';
                 $order->save();
-
-
-                return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
                 // // Kirim email konfirmasi ke customer
                 // Mail::to($order->email)->send(new OrderConfirmationMail($order));
             }
@@ -256,6 +258,7 @@ class OrderController extends Controller
 
     public function unfinishedpayment(Request $request)
     {
+        dd($_GET);
         $payload = $request->getContent();
         $data = json_decode($payload);
         $order_id = $data->order_id;
@@ -273,9 +276,6 @@ class OrderController extends Controller
                 // Update status pembayaran menjadi sukses
                 $order->status_bayar = 'sukses';
                 $order->save();
-
-
-                return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
                 // // Kirim email konfirmasi ke customer
                 // Mail::to($order->email)->send(new OrderConfirmationMail($order));
             }
