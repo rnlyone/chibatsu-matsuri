@@ -151,6 +151,25 @@
     </div>
 </div>
 
+<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center place__top w-100">
+    <div id="midwarningtoast" class="toast bg-warning" role="alert" aria-live="assertive" aria-atomic="true"
+        data-bs-autohide="true" data-bs-delay="3000">
+        <div class="toast-body">
+            <div class="icon color-white">
+                <i class="ri-error-warning-fill"></i>
+            </div>
+            <div class="content">
+                <div class="display__text">
+                    <p class="text-white">Pembayaran Pending</p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">
+                <i class="ri-close-fill"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
 
 <form action="{{route('order.response')}}" id="submit_form" method="post">
     @csrf
@@ -177,8 +196,12 @@
         onPending: function(result){
           /* You may add your own implementation here */
             console.log(result);
-            var warningmodal1 = document.getElementById("menu-warning-3");
-            warningmodal1.classList.add("menu-active");
+            var toastElList = [].slice.call(document.querySelectorAll('#midwarningtoast'))
+            var toastList = toastElList.map(function (toastEl) {
+                return new bootstrap.Toast(toastEl)
+            });
+            toastList.forEach(toast => toast.show());
+
             sendtocontroller(result);
         },
         onError: function(result){
@@ -191,6 +214,11 @@
         onClose: function(){
           /* You may add your own implementation here */
           var warningmodal1 = document.getElementById("menu-warning-3");
+            var toastElList = [].slice.call(document.querySelectorAll('#midwarningtoast'))
+            var toastList = toastElList.map(function (toastEl) {
+                return new bootstrap.Toast(toastEl)
+            });
+            toastList.forEach(toast => toast.show());
             warningmodal1.classList.add("menu-active");
         }
       });

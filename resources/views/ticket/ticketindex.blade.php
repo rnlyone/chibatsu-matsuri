@@ -131,13 +131,13 @@
             @endif
             <div class="un-myItem-list bg-white">
                 @foreach ($orders as $order)
-                <a href="{{route('cust.checkout', ['uuid' => $order->uuid])}}" class="nav flex-column" style="text-decoration: none">
+                <a href="{{route('cust.checkout', ['uuid' => $order->uuid])}}" class="nav flex-column" style="text-decoration: none" data-uuid="{{$order->uuid}}">
                     <div class="nav-link">
                         <div class="cover_img">
                             <div class="txt">
                                 <h2>#TRX-00{{$order->id}}</h2>
                                 <p>@if ($order->status_bayar == 'pending')
-                                    Pending (Verifikasi)
+                                    Pending
                                 @elseif ($order->status_bayar == 'belum')
                                     Belum dibayar
                                 @elseif ($order->status_bayar == 'sukses')
@@ -331,3 +331,30 @@ $(document).ready((function(){$('button[data-bs-toggle="pill"]').on("click",(fun
     function updateTotal(){let t=$("input[type='number']"),a=0;t.each((function(t,e){$(e).attr("name",$(e).attr("name"));let n=parseInt(ticketIdToPriceMap[$(e).attr("name")]),r=parseInt($(e).val()),i=parseInt($(e).attr("max")),l=parseInt($(e).attr("min"));r>i?e.value=i:r<l&&(e.value=l),r=Math.max(0,Math.min(i,r)),a+=n*r})),document.querySelector("#total").innerHTML="Rp. "+a.toLocaleString()}
   </script>
 
+<script>
+    $(document).ready(function() {
+        $('a').each(function() {
+            var uuid = $(this).data('uuid');
+            var url = '{{ route("cust.checkout", [ "uuid" => ":uuid" ]) }}';
+            url = url.replace(':uuid', uuid);
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(data) {
+                    $(this).html(data);
+                }.bind(this)
+            });
+
+            setInterval(function() {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        $(this).html(data);
+                    }.bind(this)
+                });
+            }.bind(this), 10000);
+        });
+    });
+</script>
