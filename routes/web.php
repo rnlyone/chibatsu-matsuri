@@ -33,9 +33,9 @@ Route::group(['middleware'=>['guest']], function(){
     Route::get('/register', [UserController::class, 'fregister'])->name('fregister');
     Route::post('/register', [UserController::class, 'register'])->name('register');
 
-    Route::fallback(function () {
-        return redirect()->route('flogin')->with('gagal', 'Anda harus login terlebih dahulu');
-    });
+    // Route::fallback(function () {
+    //     return redirect()->route('flogin')->with('gagal', 'Anda harus login terlebih dahulu');
+    // });
 });
 
 Route::group(['middleware'=>['auth']], function(){
@@ -52,11 +52,11 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('/lomba', LombaController::class);
     });
 
-    Route::middleware(['role:user'])->group(function () {
-        Route::fallback(function () {
-            return redirect()->route('flogin');
-        });
-    });
+    // Route::middleware(['role:user'])->group(function () {
+    //     Route::fallback(function () {
+    //         return redirect()->route('flogin');
+    //     });
+    // });
 });
 
 Route::get('/bloglist', [GeneralController::class, 'blog'])->name('u.blog');

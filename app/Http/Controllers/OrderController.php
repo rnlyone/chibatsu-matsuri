@@ -196,7 +196,9 @@ class OrderController extends Controller
 
     public function midtrans_response(Request $request)
     {
+
         $response = json_decode($request->response);
+        dd($response);
         $statcode = $response->status_code;
         $order_id = $response->order_id;
 
@@ -220,6 +222,7 @@ class OrderController extends Controller
     public function finishedpayment(Request $request)
     {
         $response = json_decode($request->response);
+        dd($response);
         $statcode = $response->status_code;
         $order_id = $response->order_id;
 
@@ -243,6 +246,7 @@ class OrderController extends Controller
     public function unfinishedpayment(Request $request)
     {
         $response = json_decode($request->response);
+        dd($response);
         $statcode = $response->status_code;
         $order_id = $response->order_id;
 
