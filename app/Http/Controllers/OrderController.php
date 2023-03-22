@@ -70,8 +70,6 @@ class OrderController extends Controller
 
     public function fcheckout($uuid)
     {
-
-
         $order = Order::where('uuid', $uuid)->first();
 
         $adminfee = Setting::where('setname', 'biaya_admin')->first()->value;
@@ -141,6 +139,39 @@ class OrderController extends Controller
             'adminfee' => $adminfee,
             'snapToken' => $snapToken
         ]);
+    }
+
+    public function finvoice($uuid)
+    {
+        $adminfee = Setting::where('setname', 'biaya_admin')->first()->value;
+        $order = Order::where('uuid', $uuid)->first();
+
+
+        $customcss = '';
+        $jmlsetting = Setting::count();
+        $settings = ['title' => ': Checkout',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Checkout',
+                     'navactive' => 'ticketnav'];
+        for ($i = 1; $i <= $jmlsetting; $i++) {
+            $setting = Setting::find($i);
+            $settings[$setting->setname] = $setting->value;
+        }
+
+        if(session()->get('sukses') != null){
+            return view('ticket.invoice', [
+                'customcss' => $customcss,
+                'stgs' => $settings,
+                'order' => $order,
+                'adminfee' => $adminfee,
+                'transaksi' => 'active-nav',
+            ])->with('sukses', 'Cek Tiket Kamu');
+        }
+        return view('ticket.invoice', [
+            'order' => $order,
+            'adminfee' => $adminfee,
+            'transaksi' => 'active-nav',
+        ])->with('sukses', 'Cek Tiket Kamu');
     }
 
     public function response(Request $request)
