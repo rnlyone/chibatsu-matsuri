@@ -196,9 +196,7 @@ class OrderController extends Controller
 
     public function midtrans_response(Request $request)
     {
-        dd($_GET);
-        $payload = $request->getContent();
-        $data = json_decode($payload);
+        $data = (object) $_GET;
         $order_id = $data->order_id;
 
         $string = $order_id;
