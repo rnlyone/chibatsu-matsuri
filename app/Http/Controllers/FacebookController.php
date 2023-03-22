@@ -49,7 +49,7 @@ class FacebookController extends Controller
             // Simpan data gambar ke dalam file
 
             Storage::makeDirectory('public/avatar');
-            Storage::put('public/avatar/' . $filename, $data);
+            Storage::put('public/avatar/' . $filename, $data, 'public');
         } catch (\Throwable $th) {
             dd($th);
         }

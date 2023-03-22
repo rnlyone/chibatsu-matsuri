@@ -71,7 +71,7 @@ class SlideController extends Controller
         $newSlide->save();
 
         // Move uploaded file to storage
-        $file->storeAs('public/slides', $fileName);
+        $file->storeAs('public/slides', $fileName, 'public');
 
         return response()->json(['status' => 'success', 'slide' => $newSlide]);
     }

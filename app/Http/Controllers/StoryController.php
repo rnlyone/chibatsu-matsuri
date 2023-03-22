@@ -82,7 +82,7 @@ class StoryController extends Controller
         $newStory->save();
 
         // Move uploaded file to storage
-        $file->storeAs('public/stories', $fileName);
+        $file->storeAs('public/stories', $fileName, 'public');
 
         return response()->json(['status' => 'success', 'story' => $newStory]);
     }
