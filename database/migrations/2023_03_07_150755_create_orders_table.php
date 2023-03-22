@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('id_cust')->constrained('users')->onDelete('cascade');
             $table->bigInteger('jumlah_bayar');
             $table->text('detail_order');
-            $table->enum('status_bayar', ['sukses', 'pending', 'gagal']);
+            $table->enum('status_bayar', ['sukses', 'pending', 'gagal', 'belum']);
             $table->timestamps();
         });
     }

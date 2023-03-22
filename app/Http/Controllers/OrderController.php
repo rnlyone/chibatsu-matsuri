@@ -30,7 +30,7 @@ class OrderController extends Controller
                 'id_cust' => auth()->user()->id,
                 'jumlah_bayar' => $sum,
                 'detail_order' => "",
-                'status_bayar' => 'pending'
+                'status_bayar' => 'belum'
             ]);
             foreach ($tickets as $i => $ticket) {
                 if($request->{$ticket->id} > 0){
@@ -204,7 +204,7 @@ class OrderController extends Controller
         $result = $array[1];
 
         // get transaction status from request
-        $transactionStatus = $request->input('transaction_status');
+        $transactionStatus = $data->transaction_status;
 
         // get order from database
         $order = Order::find($result);
@@ -216,6 +216,10 @@ class OrderController extends Controller
         } elseif ($transactionStatus == 'settlement') {
             // update order status to 'sukses' if transaction is settled
             $order->status_bayar = 'sukses';
+            $order->save();
+        } elseif ($transactionStatus == 'pending') {
+            // update order status to 'sukses' if transaction is settled
+            $order->status_bayar = 'pending';
             $order->save();
         } elseif ($transactionStatus == 'cancel' || $transactionStatus == 'deny' || $transactionStatus == 'expire') {
             // update order status to 'gagal' if transaction is cancelled, denied, or expired
