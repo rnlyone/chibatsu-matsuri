@@ -137,7 +137,9 @@
                             <div class="txt">
                                 <h2>#TRX-00{{$order->id}}</h2>
                                 <p>@if ($order->status_bayar == 'pending')
-                                    Belum Bayar
+                                    Pending (Verifikasi)
+                                @elseif ($order->status_bayar == 'belum')
+                                    Belum dibayar
                                 @elseif ($order->status_bayar == 'sukses')
                                     Sukses
                                 @else
@@ -148,7 +150,11 @@
                         <div class="other-side">
                             @if ($order->status_bayar == 'pending')
                                 <a href="#" class="out-link-warning">
-                                    <i class="ri-check-line"></i>
+                                    <i class="ri-loader-line"></i>
+                                </a>
+                            @elseif ($order->status_bayar == 'belum')
+                                <a href="#" class="out-link-warning">
+                                    <i class="ri-loader-line"></i>
                                 </a>
                             @elseif ($order->status_bayar == 'sukses')
                                 <a href="#" class="out-link-success">
@@ -156,7 +162,7 @@
                                 </a>
                             @else
                                 <a href="#" class="out-link-danger">
-                                    <i class="ri-check-line"></i>
+                                    <i class="ri-close-line"></i>
                                 </a>
                             @endif
                         </div>
