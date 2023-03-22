@@ -237,10 +237,8 @@ class OrderController extends Controller
         $array = explode("-", $string);
         $result = $array[1];
 
-        $tix = Order::find($result);
-
         if ($data->status_code == '200' && $data->transaction_status == 'capture') {
-            $order = Order::where('id', $data->order_id)->first();
+            $order = Order::find($result);
 
             if ($order) {
                 // Update status pembayaran menjadi sukses
