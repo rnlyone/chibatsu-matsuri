@@ -230,7 +230,7 @@ class OrderController extends Controller
 
     public function finishedpayment(Request $request)
     {
-        dd($_GET);
+        dd($_GET, $request);
         $payload = $request->getContent();
         $data = json_decode($payload);
         $order_id = $data->order_id;
