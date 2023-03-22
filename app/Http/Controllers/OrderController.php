@@ -223,7 +223,7 @@ class OrderController extends Controller
             $order->save();
         }
 
-        return response('OK', 200);
+        return response(200);
     }
 
     public function finishedpayment(Request $request)
