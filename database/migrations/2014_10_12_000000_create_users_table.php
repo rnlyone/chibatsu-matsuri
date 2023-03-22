@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('instansi');
+            $table->string('no_hp')->nullable();
+            $table->string('instansi')->nullable();
             $table->string('password');
+            $table->string('avatar')->default('itsupp.png');
             $table->rememberToken();
             $table->timestamps();
         });

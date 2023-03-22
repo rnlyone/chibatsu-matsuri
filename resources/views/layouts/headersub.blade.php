@@ -17,9 +17,15 @@
 
             <header class="default heade-sticky">
                 <div class="un-title-page go-back">
-                    <a href="javascript:history.back()" class="icon visited">
-                        <i class="ri-arrow-drop-left-line"></i>
-                    </a>
+                    @if ($stgs['title'] == ': Checkout' )
+                        <a href="{{route('u.ticket')}}" class="icon visited">
+                            <i class="ri-arrow-drop-left-line"></i>
+                        </a>
+                    @else
+                        <a href="javascript:history.back()" class="icon visited">
+                            <i class="ri-arrow-drop-left-line"></i>
+                        </a>
+                    @endif
                     <h1>{{$stgs['pagetitle']}}</h1>
                 </div>
                 <div class="un-block-right">
@@ -29,14 +35,25 @@
                         </a>
                         <span class="bull-activity"></span>
                     </div>
+                    @auth
+                        <div class="un-user-profile">
+                            <a href="#user" aria-label="profile">
+                                <picture>
+                                    <source srcset="/storage/avatar/{{auth()->user()->avatar}}" type="image/png">
+                                    <img class="img-avatar" src="/images/avatar/11.jpg" alt="">
+                                </picture>
+                            </a>
+                        </div>
+                    @endauth
+                    @guest
                     <div class="un-user-profile">
-                        <a href="page-my-profile.html" aria-label="profile">
-                            <picture>
-                                <source srcset="/images/avatar/11.webp" type="image/webp">
-                                <img class="img-avatar" src="images/avatar/11.jpg" alt="">
-                            </picture>
-                        </a>
+                        <div class="un-notification">
+                            <a href="{{route('flogin')}}" aria-label="activity">
+                                <i class="ri-user-4-line"></i>
+                            </a>
+                        </div>
                     </div>
+                    @endguest
                     <!-- menu-sidebar -->
                     <div class="menu-sidebar">
                         <button type="button" name="sidebarMenu" aria-label="sidebarMenu" class="btn"

@@ -25,7 +25,9 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail,
             'email_verified_at' => fake()->boolean(80) ? now() : null,
             'instansi' => fake()->company,
+            'no_hp' => fake()->phoneNumber(),
             'password' => bcrypt('password'),
+            'avatar' => fake()->randomElement(['itsupp.png', 'itsukipp.png']),
             'remember_token' => Str::random(10),
         ];
     }

@@ -1,5 +1,4 @@
 @include('layouts.app')
-
 <body>
     <!-- ===================================
       START LODAER PAGE
@@ -18,8 +17,8 @@
             <header class="default heade-sticky">
                 <a href="index.html">
                     <div class="un-item-logo">
-                        <img class="logo-img light-mode" src="images/gakuensai_b.svg" alt="">
-                        <img class="logo-img dark-mode" src="images/gakuensai_white.svg" alt="">
+                        <img class="logo-img light-mode" src="/images/gakuensai_b.svg" alt="">
+                        <img class="logo-img dark-mode" src="/images/gakuensai_white.svg" alt="">
                     </div>
                 </a>
                 <div class="un-block-right">
@@ -29,14 +28,25 @@
                         </a>
                         <span class="bull-activity"></span>
                     </div>
+                    @auth
+                        <div class="un-user-profile">
+                            <a href="#user" aria-label="profile">
+                                <picture>
+                                    <source srcset="/storage/avatar/{{auth()->user()->avatar}}" type="image/png">
+                                    <img class="img-avatar" src="/images/avatar/11.jpg" alt="">
+                                </picture>
+                            </a>
+                        </div>
+                    @endauth
+                    @guest
                     <div class="un-user-profile">
-                        <a href="page-my-profile.html" aria-label="profile">
-                            <picture>
-                                <source srcset="images/avatar/11.webp" type="image/webp">
-                                <img class="img-avatar" src="images/avatar/11.jpg" alt="">
-                            </picture>
-                        </a>
+                        <div class="un-notification">
+                            <a href="{{route('flogin')}}" aria-label="activity">
+                                <i class="ri-user-4-line"></i>
+                            </a>
+                        </div>
                     </div>
+                    @endguest
                     <!-- menu-sidebar -->
                     <div class="menu-sidebar">
                         <button type="button" name="sidebarMenu" aria-label="sidebarMenu" class="btn"

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->text('persyaratan');
             $table->text('juknis');
             $table->integer('biaya');
+            $table->string('level');
+            $table->boolean('visibilitas');
+            $table->string('src');
             $table->timestamps();
         });
     }

@@ -16,6 +16,9 @@ class Lomba extends Model
         'persyaratan',
         'juknis',
         'biaya',
+        'level',
+        'visibilitas',
+        'src'
     ];
 
     public function daftars()

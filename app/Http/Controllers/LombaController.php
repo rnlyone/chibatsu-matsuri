@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lomba;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class LombaController extends Controller
@@ -14,7 +15,23 @@ class LombaController extends Controller
      */
     public function index()
     {
-        //
+        #page_setup
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Lomba',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Dashboard Lomba',
+                     'navactive' => '',
+                     'baractive' => 'lombabar'];
+                     foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        return view('admin.lomba', [
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings]);
     }
 
     /**

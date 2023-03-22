@@ -16,6 +16,7 @@ class Story extends Model
         'src',
         'preview',
         'link',
+        'link_text',
         'seen',
         'time',
     ];

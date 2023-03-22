@@ -11,7 +11,9 @@ class Ticket extends Model
 
     protected $fillable = [
         'nama_tiket',
+        'deskripsi_tiket',
         'harga',
+        'harga_coret',
         'kuota',
     ];
 

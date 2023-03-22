@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('src');
             $table->text('preview')->nullable();
             $table->text('link')->nullable();
-            $table->text('btn_caption')->nullable();
+            $table->text('link_text')->nullable();
             $table->boolean('seen')->default(false);
             $table->timestamps();
         });

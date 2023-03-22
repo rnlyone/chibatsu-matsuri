@@ -15,15 +15,44 @@
     <meta name="description" content="{{$stgs['nama_aplikasi']}} : {{$stgs['title']}}">
     <meta name="keywords"
         content="gakuensai, festival, expo, competition, pwa" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="images/favicon/icon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon/icon-32x32.png" sizes="32x32">
     <!-- IOS SUPPORT -->
-    <link rel="apple-touch-icon" href="images/favicon/icon-96x96.png">
+    <link rel="apple-touch-icon" href="/images/favicon/icon-96x96.png">
     <!-- CSS FILES -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/remixicon.min.css">
     <link rel="stylesheet" href="/assets/vendors/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/assets/vendors/zuck_stories/zuck.min.css">
-    <link rel="manifest" href="_manifest.json" />
+    <link rel="manifest" href="/_manifest.json" />
+
+    @if ($stgs['title'] == ": Checkout")
+        <script type="text/javascript"
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-gH_jwK69uZGaqR1S"></script>
+    @endif
+
+
+    {{-- <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        function ctrlShiftKey(e, keyCode) {
+        return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+        }
+
+        document.onkeydown = (e) => {
+        // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
+        if (
+            event.keyCode === 123 ||
+            ctrlShiftKey(e, 'I') ||
+            ctrlShiftKey(e, 'J') ||
+            ctrlShiftKey(e, 'C') ||
+            (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+        )
+            return false;
+        };
+    </script> --}}
 
 </head>

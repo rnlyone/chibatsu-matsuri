@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\Story;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,27 @@ class StoryController extends Controller
      */
     public function index()
     {
-        //
+        #page_setup
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Story',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Story',
+                     'navactive' => '',
+                     'baractive' => 'storybar'];
+                     foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+
+        $mystories = Story::where('id_user', auth()->user()->id)->get();
+
+        return view('admin.story', [
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'mystories' => $mystories,
+            'stgs' => $settings]);
     }
 
     /**
@@ -24,7 +45,7 @@ class StoryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,8 +56,37 @@ class StoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => 'nullable|in:photo,video',
+            'length' => 'nullable|integer|min:1',
+            'src' => 'required',
+            'preview' => 'nullable',
+            'link' => 'nullable',
+            'link_text' => 'nullable',
+            'seen' => 'boolean',
+        ]);
+
+        $file = $validatedData['src'];
+        $fileExtension = $file->getClientOriginalExtension();
+        $fileName = uniqid() . '.' . $fileExtension;
+
+        $newStory = new Story;
+        $newStory->id_user = auth()->user()->id;
+        $newStory->type = 'photo';
+        $newStory->length = 15;
+        $newStory->src = $fileName;
+        $newStory->preview = $validatedData['preview'] ?? null;
+        $newStory->link = $validatedData['link'] ?? null;
+        $newStory->link_text = $validatedData['link_text'] ?? null;
+        $newStory->seen = $validatedData['seen'] ?? false;
+        $newStory->save();
+
+        // Move uploaded file to storage
+        $file->storeAs('public/stories', $fileName);
+
+        return response()->json(['status' => 'success', 'story' => $newStory]);
     }
+
 
     /**
      * Display the specified resource.
@@ -80,6 +130,7 @@ class StoryController extends Controller
      */
     public function destroy(Story $story)
     {
-        //
+        $story->delete();
+        return response()->json(['status' => 'success']);
     }
 }
