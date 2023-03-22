@@ -17,15 +17,15 @@
         content="gakuensai, festival, expo, competition, pwa" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="/images/favicon/icon-32x32.png" sizes="32x32">
+    {{-- <link rel="icon" type="image/png" href="/images/favicon/icon-32x32.png" sizes="32x32">
     <!-- IOS SUPPORT -->
-    <link rel="apple-touch-icon" href="/images/favicon/icon-96x96.png">
+    <link rel="apple-touch-icon" href="/images/favicon/icon-96x96.png"> --}}
     <!-- CSS FILES -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/remixicon.min.css">
     <link rel="stylesheet" href="/assets/vendors/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/assets/vendors/zuck_stories/zuck.min.css">
-    <link rel="manifest" href="/_manifest.json" />
+    {{-- <link rel="manifest" href="/_manifest.json" /> --}}
 
     @if ($stgs['title'] == ": Checkout")
         <script type="text/javascript"
@@ -54,5 +54,7 @@
             return false;
         };
     </script> --}}
+
+    @laravelPWA
 
 </head>

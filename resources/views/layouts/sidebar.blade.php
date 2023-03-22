@@ -9,7 +9,7 @@
                 <div class="un-user-profile">
                     <div class="image_user">
                         <picture>
-                            <source srcset="/storage/avatar/{{auth()->user()->avatar}}" type="image/png">
+                            <source srcset="/storage/public/avatar/{{auth()->user()->avatar}}" type="image/png">
                             <img src="images/avatar/11.jpg" alt="image">
                         </picture>
                     </div>

@@ -408,7 +408,7 @@
         @foreach($users as $i => $user)
             {
                 id: 'user'+'{{ $i+1 }}',
-                photo: '/storage/avatar/'+'{{ $user->avatar }}',
+                photo: '/storage/public/avatar/'+'{{ $user->avatar }}',
                 name: '{{ $user->username }}',
                 link: '{{ $user->link }}',
                 lastUpdated: '{{ $user->lastUpdated }}',
