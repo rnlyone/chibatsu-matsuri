@@ -196,11 +196,9 @@ class OrderController extends Controller
 
     public function midtrans_response(Request $request)
     {
-
-        $response = json_decode($request->response);
-        dd($response);
-        $statcode = $response->status_code;
-        $order_id = $response->order_id;
+        $payload = $request->getContent();
+        $data = json_decode($payload);
+        $order_id = $data->order_id;
 
         $string = $order_id;
         $array = explode("-", $string);
@@ -208,23 +206,29 @@ class OrderController extends Controller
 
         $tix = Order::find($result);
 
-        if($statcode == '200'){
-            $tix->update([
-                'status_bayar' => 'sukses',
-            ]);
+        if ($data->status_code == '200' && $data->transaction_status == 'capture') {
+            $order = Order::where('id', $data->order_id)->first();
 
-            return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
-        } else {
-            return back()->with('gagal', 'gagal '.$statcode);
+            if ($order) {
+                // Update status pembayaran menjadi sukses
+                $order->status_bayar = 'sukses';
+                $order->save();
+
+
+                return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
+                // // Kirim email konfirmasi ke customer
+                // Mail::to($order->email)->send(new OrderConfirmationMail($order));
+            }
         }
+
+        return response('OK', 200);
     }
 
     public function finishedpayment(Request $request)
     {
-        $response = json_decode($request->response);
-        dd($response);
-        $statcode = $response->status_code;
-        $order_id = $response->order_id;
+        $payload = $request->getContent();
+        $data = json_decode($payload);
+        $order_id = $data->order_id;
 
         $string = $order_id;
         $array = explode("-", $string);
@@ -232,23 +236,29 @@ class OrderController extends Controller
 
         $tix = Order::find($result);
 
-        if($statcode == '200'){
-            $tix->update([
-                'status_bayar' => 'sukses',
-            ]);
+        if ($data->status_code == '200' && $data->transaction_status == 'capture') {
+            $order = Order::where('id', $data->order_id)->first();
 
-            return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
-        } else {
-            return back()->with('gagal', 'gagal '.$statcode);
+            if ($order) {
+                // Update status pembayaran menjadi sukses
+                $order->status_bayar = 'sukses';
+                $order->save();
+
+
+                return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
+                // // Kirim email konfirmasi ke customer
+                // Mail::to($order->email)->send(new OrderConfirmationMail($order));
+            }
         }
+
+        return response('OK', 200);
     }
 
     public function unfinishedpayment(Request $request)
     {
-        $response = json_decode($request->response);
-        dd($response);
-        $statcode = $response->status_code;
-        $order_id = $response->order_id;
+        $payload = $request->getContent();
+        $data = json_decode($payload);
+        $order_id = $data->order_id;
 
         $string = $order_id;
         $array = explode("-", $string);
@@ -256,15 +266,22 @@ class OrderController extends Controller
 
         $tix = Order::find($result);
 
-        if($statcode == '200'){
-            $tix->update([
-                'status_bayar' => 'sukses',
-            ]);
+        if ($data->status_code == '200' && $data->transaction_status == 'capture') {
+            $order = Order::where('id', $data->order_id)->first();
 
-            return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
-        } else {
-            return back()->with('gagal', 'gagal '.$statcode);
+            if ($order) {
+                // Update status pembayaran menjadi sukses
+                $order->status_bayar = 'sukses';
+                $order->save();
+
+
+                return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
+                // // Kirim email konfirmasi ke customer
+                // Mail::to($order->email)->send(new OrderConfirmationMail($order));
+            }
         }
+
+        return response('OK', 200);
     }
 
     /**
