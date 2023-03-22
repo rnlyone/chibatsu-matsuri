@@ -414,7 +414,7 @@
                 lastUpdated: '{{ $user->lastUpdated }}',
                 items: [
                     @foreach($user->stories as $j => $story)
-                        buildItem('{{ $j+1 }}', '{{ $story->type }}', '{{ $story->length }}', '/storage/stories/'+'{{ $story->src }}', '{{ $story->preview }}', '{{ $story->link }}', '{{ $story->link_text }}', '{{ $story->created_at->timestamp }}', false)
+                        buildItem('{{ $j+1 }}', '{{ $story->type }}', '{{ $story->length }}', '/storage/public/stories/'+'{{ $story->src }}', '{{ $story->preview }}', '{{ $story->link }}', '{{ $story->link_text }}', '{{ $story->created_at->timestamp }}', false)
                         @if (!$loop->last)
                             ,
                         @endif
