@@ -39,7 +39,7 @@
                         <div class="un-user-profile">
                             <a href="#user" aria-label="profile">
                                 <picture>
-                                    <source srcset="/storage/avatar/{{auth()->user()->avatar}}" type="image/png">
+                                    <source srcset="/storage/public/avatar/{{auth()->user()->avatar}}" type="image/png">
                                     <img class="img-avatar" src="/images/avatar/11.jpg" alt="">
                                 </picture>
                             </a>
