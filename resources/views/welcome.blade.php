@@ -51,18 +51,8 @@
                         </picture>
                     </a>
                 </div>
-                <div class="swiper-slide" data-swiper-slide-index="1" role="group" aria-label="2 / 4"
-                    style="width: 340px; margin-right: 20px;">
-                    <!-- item-card-nft -->
-                    <a href="page-collectibles-details.html" class="item-card-nft">
-                        <picture>
-                            <source srcset="images/slides/slide2.webp" type="image/webp">
-                            <img class="big-image" src="images/slides/slide2.png" alt="">
-                        </picture>
-                    </a>
-                </div>
                 @foreach ($slides as $i => $slide)
-                    <div class="swiper-slide" data-swiper-slide-index="1" role="group" aria-label="{{$i+2}} / {{$slides->count()}}"
+                    <div class="swiper-slide" data-swiper-slide-index="1" role="group" aria-label="{{$i+1}} / {{$slides->count()}}"
                         style="width: 340px; margin-right: 20px;">
                         <!-- item-card-nft -->
                         <a href="{{$slide->link}}" class="item-card-nft">
