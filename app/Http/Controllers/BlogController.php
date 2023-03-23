@@ -114,7 +114,7 @@ class BlogController extends Controller
     {
         // Validasi input dari user
         $validatedData = $request->validate([
-            'cover' => 'required|mimes:png,gif,webp|max:50000',
+            'cover' => 'required|mimes:png,gif,webp,jpg,jpeg|max:50000',
             'category' => 'required|string',
             'title' => 'required|string',
             'content' => 'required|string',
