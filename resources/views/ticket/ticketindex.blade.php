@@ -330,3 +330,15 @@ $(document).ready((function(){$('button[data-bs-toggle="pill"]').on("click",(fun
     let ticketIdToPriceMap = { @foreach ($tickets as $ticket) {{$ticket->id}}: {{$ticket->harga}}, @endforeach };
     function updateTotal(){let t=$("input[type='number']"),a=0;t.each((function(t,e){$(e).attr("name",$(e).attr("name"));let n=parseInt(ticketIdToPriceMap[$(e).attr("name")]),r=parseInt($(e).val()),i=parseInt($(e).attr("max")),l=parseInt($(e).attr("min"));r>i?e.value=i:r<l&&(e.value=l),r=Math.max(0,Math.min(i,r)),a+=n*r})),document.querySelector("#total").innerHTML="Rp. "+a.toLocaleString()}
   </script>
+
+<script>
+    window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted ||
+                                ( typeof window.performance != "undefined" &&
+                                    window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.reload();
+        }
+    });
+</script>
