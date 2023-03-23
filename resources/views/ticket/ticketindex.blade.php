@@ -330,31 +330,3 @@ $(document).ready((function(){$('button[data-bs-toggle="pill"]').on("click",(fun
     let ticketIdToPriceMap = { @foreach ($tickets as $ticket) {{$ticket->id}}: {{$ticket->harga}}, @endforeach };
     function updateTotal(){let t=$("input[type='number']"),a=0;t.each((function(t,e){$(e).attr("name",$(e).attr("name"));let n=parseInt(ticketIdToPriceMap[$(e).attr("name")]),r=parseInt($(e).val()),i=parseInt($(e).attr("max")),l=parseInt($(e).attr("min"));r>i?e.value=i:r<l&&(e.value=l),r=Math.max(0,Math.min(i,r)),a+=n*r})),document.querySelector("#total").innerHTML="Rp. "+a.toLocaleString()}
   </script>
-
-<script>
-    $(document).ready(function() {
-        $('a').each(function() {
-            var uuid = $(this).data('uuid');
-            var url = '{{ route("cust.checkout", [ "uuid" => ":uuid" ]) }}';
-            url = url.replace(':uuid', uuid);
-
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function(data) {
-                    $(this).html(data);
-                }.bind(this)
-            });
-
-            setInterval(function() {
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function(data) {
-                        $(this).html(data);
-                    }.bind(this)
-                });
-            }.bind(this), 10000);
-        });
-    });
-</script>
