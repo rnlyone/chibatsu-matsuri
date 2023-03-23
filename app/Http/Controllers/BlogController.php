@@ -129,7 +129,7 @@ class BlogController extends Controller
         $blog->uuid = Str::slug($validatedData['title'], '-');
         $blog->category = $validatedData['category'];
         $blog->title = $validatedData['title'];
-        $blog->content = nl2br($validatedData['content']);
+        $blog->content = $validatedData['content'];
         $blog->cover = $fileName;
 
         // Move uploaded file to storage
@@ -223,7 +223,7 @@ class BlogController extends Controller
         $blog->uuid = Str::slug($validatedData['title'], '-');
         $blog->category = $validatedData['category'];
         $blog->title = $validatedData['title'];
-        $blog->content = nl2br($validatedData['content']);
+        $blog->content = $validatedData['content'];
 
 
 
