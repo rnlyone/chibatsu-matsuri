@@ -1,8 +1,35 @@
 @include('layouts.headersub')
-@include('layouts.pagetitle')
+
+<section class="un-page-components">
+    <div class="un-title-default">
+        <div class="text">
+            <h2>{{$stgs['pagetitle']}}</h2>
+            <p>{{$stgs['subtitle'] ?? $stgs['pagetitle']}}</p>
+        </div>
+        @if ($stgs['title'] == ': Edit Artikel')
+            <div class="un-block-right">
+                <form action="{{ route('ourblog.destroy', ['ourblog' => $article->id]) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')" class="icon-back visited" aria-label="iconBtn">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </form>
+            </div>
+        @endif
+
+    </div>
+
+</section>
+
 
 <div class="un-create-collectibles un-details-collectibles bg-white">
-    <form action="{{route('ourblog.store')}}" method="post" enctype="multipart/form-data">
+    @if ($stgs['title'] != ': Edit Artikel')
+        <form action="{{route('ourblog.store')}}" method="post" enctype="multipart/form-data">
+    @else
+        <form action="{{route('ourblog.update', ['ourblog' => $article->id])}}" method="post" enctype="multipart/form-data">
+            @method('PUT')
+    @endif
         @csrf
         <div class="form-group upload-form">
             <h2>Upload Cover</h2>
@@ -23,15 +50,15 @@
         </div>
         <div class="form-group">
             <label>Kategori</label>
-            <input name="category" type="text" class="form-control" placeholder="e. g. &quot;Trivia&quot;" value="{{old('category')}}">
+            <input name="category" type="text" class="form-control" placeholder="e. g. &quot;Trivia&quot;" value="{{$article->category ?? old('category')}}">
         </div>
         <div class="form-group">
             <label>Judul Artikel</label>
-            <input name="title" type="text" class="form-control" placeholder="e. g. &quot;10 Kisah Nabi&quot;" value="{{old('title')}}">
+            <input name="title" type="text" class="form-control" placeholder="e. g. &quot;10 Kisah Nabi&quot;" value="{{$article->title ?? old('title')}}">
         </div>
         <div class="form-group">
             <label>Konten</label>
-            <textarea name="content" class="form-control" rows="3" placeholder="e. g. &quot;After purchasing you’ll be able to get ...&quot;">{{old('content')}}</textarea>
+            <textarea name="content" class="form-control" rows="3" placeholder="e. g. &quot;After purchasing you’ll be able to get ...&quot;">{{$article->content ?? old('content')}}</textarea>
         </div>
         <div class="space-sticky-footer mb-5 zindex-sticky"></div>
         <div class="footer footer-pages-forms mb-5" style="z-index: 90;">
@@ -43,7 +70,7 @@
                         </a>
                 </div>
                 <button type="submit" class="btn btn-bid-items">
-                    <p>Create Slide</p>
+                    <p>Buat Artikel</p>
                     <div class="ico">
                         <i class="ri-arrow-drop-right-line"></i>
                     </div>

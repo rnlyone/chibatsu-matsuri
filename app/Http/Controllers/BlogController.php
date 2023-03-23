@@ -129,7 +129,7 @@ class BlogController extends Controller
         $blog->uuid = Str::slug($validatedData['title'], '-');
         $blog->category = $validatedData['category'];
         $blog->title = $validatedData['title'];
-        $blog->content = $validatedData['content'];
+        $blog->content = nl2br($validatedData['content']);
         $blog->cover = $fileName;
 
         // Move uploaded file to storage
@@ -150,24 +150,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $customcss = '';
-        $jmlsetting = Setting::where('group', 'env')->get();
-        $settings = ['title' => ': Blog',
-                     'customcss' => $customcss,
-                     'pagetitle' => 'Blog',
-                     'navactive' => '',
-                     'baractive' => ''];
-                    foreach ($jmlsetting as $i => $set) {
-                        $settings[$set->setname] = $set->value;
-                     }
-
-        return view('admin.blog.buatartikel', [
-            'article' => $blog,
-            'customcss' => $customcss,
-            $settings['navactive'] => '-active-links',
-            $settings['baractive'] => 'active',
-            'stgs' => $settings,
-            ]);
+        //
     }
 
     /**
@@ -176,9 +159,27 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit($blog)
     {
-        //
+        $article = Blog::find($blog);
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Edit Artikel',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Edit Artikel',
+                     'navactive' => '',
+                     'baractive' => ''];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        return view('admin.blog.buatartikel', [
+            'article' => $article,
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**
@@ -188,9 +189,49 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $blog)
     {
-        //
+        // dd($request);
+        // Validasi input dari user
+
+        $blog = Blog::find($blog);
+        if ($request->cover == null) {
+            $validatedData = $request->validate([
+                'category' => 'required|string',
+                'title' => 'required|string',
+                'content' => 'required|string',
+            ]);
+        } else {
+            $validatedData = $request->validate([
+                'cover' => 'required|mimes:png,gif,webp,jpg,jpeg|max:50000',
+                'category' => 'required|string',
+                'title' => 'required|string',
+                'content' => 'required|string',
+            ]);
+
+            $file = $validatedData['cover'];
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileName = uniqid() . '.' . $fileExtension;
+
+            $blog->cover = $fileName;
+
+            // Move uploaded file to storage
+            $file->storeAs('public/coverblog', $fileName, 'public');
+        }
+
+        // Simpan data ke database
+        $blog->uuid = Str::slug($validatedData['title'], '-');
+        $blog->category = $validatedData['category'];
+        $blog->title = $validatedData['title'];
+        $blog->content = $validatedData['content'];
+
+
+
+
+        $blog->save();
+
+
+        return redirect()->route('ourblog.index')->with('sukses', 'Berhasil Mengedit Artikel');
     }
 
     /**
@@ -199,8 +240,11 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy($blog)
     {
-        //
+        $blog = Blog::find($blog);
+
+        $blog->delete();
+        return redirect()->route('ourblog.index')->with('sukses', 'Berhasil Menghapus Artikel');
     }
 }

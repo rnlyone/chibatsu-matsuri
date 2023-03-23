@@ -20,7 +20,7 @@
         <ul class="nav flex-column">
             @foreach ($blogs as $blog)
                 <article class="nav-item">
-                    <a class="nav-link" href="{{route('ourblog.show', ['ourblog' => $blog->id])}}">
+                    <a class="nav-link" href="{{route('ourblog.edit', ['ourblog' => $blog])}}">
                         <div class="image-blog">
                             <picture>
                                 <source srcset="/storage/public/coverblog/{{$blog->cover}}" type="image/webp">
