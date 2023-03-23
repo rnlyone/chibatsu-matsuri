@@ -45,11 +45,10 @@ class FacebookController extends Controller
 
             // Ambil data gambar dari URL
             $data = file_get_contents($user->avatar);
+            $photo = $user->avatar;
 
             // Simpan data gambar ke dalam file
-
-            Storage::makeDirectory('public/avatar');
-            Storage::storeAs('public/avatar/' . $filename, $data, 'public');
+            $photo->storeAs('public/avatar/' . $filename, $data, 'public');
         } catch (\Throwable $th) {
             dd($th);
         }
