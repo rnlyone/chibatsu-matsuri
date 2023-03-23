@@ -93,36 +93,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="nav-link mt-2 mb-0">
+                                    <div class="item-user-img py-0">
+                                        <div class="txt-user">
+                                            <h5>Total</h5>
+                                        </div>
+                                    </div>
+                                    <div class="other-option item-user-img">
+                                        <div class="txt-user">
+                                            <p>Rp. {{number_format($order->jumlah_bayar)}}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="space-sticky-footer mb-5 zindex-sticky"></div>
-                <div class="footer mb-5" style="z-index: 90;">
-                    <div class="content">
-                        <div class="txt-user">
-                            <h5>Total</h5>
-                            <h6 id="total">Rp.{{$order->jumlah_bayar}}</h6>
-                        </div>
-                        @auth
-                        <a href="javascript: void(0)" id="pay-button" data-bs-toggle="modal" data-bs-target="#mdllOtherOpen"
-                            class="btn btn-bid-items visited">
-                            <p>Bayar</p>
-                            <div class="ico">
-                                <i class="ri-arrow-drop-right-line"></i>
-                            </div>
-                        </a>
-                        @endauth
-                        @guest
-                        <a href="{{route('flogin')}}" class="btn btn-bid-items visited">
-                            <p>Login</p>
-                            <div class="ico">
-                                <i class="ri-arrow-drop-right-line"></i>
-                            </div>
-                        </a>
-                        @endguest
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -157,49 +145,4 @@
     <input type="hidden" name="order_id" value="{{$order->id}}">
     <input type="hidden" name="json" id="json_callback">
 </form>
-
-<script type="text/javascript">
-    // For example trigger on button clicked, or any time you need
-    var payButton = document.getElementById('pay-button');
-    payButton.addEventListener('click', function () {
-      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-      window.snap.pay('{{$snapToken}}', {
-        onSuccess: function(result){
-          /* You may add your own implementation here */
-          console.log(result);
-          var toastElList = [].slice.call(document.querySelectorAll('#liveToastEight'))
-            var toastList = toastElList.map(function (toastEl) {
-                return new bootstrap.Toast(toastEl)
-            });
-            toastList.forEach(toast => toast.show());
-            sendtocontroller(result);
-        },
-        onPending: function(result){
-          /* You may add your own implementation here */
-            console.log(result);
-            var warningmodal1 = document.getElementById("menu-warning-3");
-            warningmodal1.classList.add("menu-active");
-            sendtocontroller(result);
-        },
-        onError: function(result){
-          /* You may add your own implementation here */
-          alert("payment failed!"); console.log(result);
-          var warningmodal1 = document.getElementById("menu-warning-2");
-            warningmodal1.classList.add("menu-active");
-            sendtocontroller(result);
-        },
-        onClose: function(){
-          /* You may add your own implementation here */
-          var warningmodal1 = document.getElementById("menu-warning-3");
-            warningmodal1.classList.add("menu-active");
-        }
-      });
-      // customer will be redirected after completing payment pop-up
-    });
-
-    function sendtocontroller(result) {
-        document.getElementById('json_callback').value = JSON.stringify(result);
-        $('#submit_form').submit();
-    }
-</script>
 

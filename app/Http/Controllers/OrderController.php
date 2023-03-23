@@ -149,9 +149,9 @@ class OrderController extends Controller
 
         $customcss = '';
         $jmlsetting = Setting::count();
-        $settings = ['title' => ': Checkout',
+        $settings = ['title' => ': Invoice',
                      'customcss' => $customcss,
-                     'pagetitle' => 'Checkout',
+                     'pagetitle' => 'Invoice',
                      'navactive' => 'ticketnav'];
         for ($i = 1; $i <= $jmlsetting; $i++) {
             $setting = Setting::find($i);
