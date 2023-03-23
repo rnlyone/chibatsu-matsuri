@@ -28,13 +28,12 @@
                     <div class="un-balance">
                         <div class="content-balance">
                             <div class="head-balance">
-                                <h4>My Balance</h4>
-                                <a class="btn link-addBalance" data-bs-toggle="modal" data-bs-dismiss="modal"
-                                    data-bs-target="#mdllAddETH">
+                                <h4>Order Saya</h4>
+                                <a href="{{route('u.ticket')}}" class="btn link-addBalance">
                                     <i class="ri-add-fill"></i>
                                 </a>
                             </div>
-                            <p class="no-balance">3,650 ETH</p>
+                            <p class="no-balance">{{auth()->user()->orders->count()}} Orders</p>
                         </div>
                     </div>
                     <a href="{{route('logout')}}" class="btn btn-sm-size bg-white text-dark rounded-pill">

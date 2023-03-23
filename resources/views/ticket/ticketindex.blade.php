@@ -46,6 +46,19 @@
                         @csrf
                         <ul class="nav flex-column">
                             @foreach ($tickets as $tix)
+                            @php
+                            $orderdetails = $tix->orderdetails;
+
+                            $summ = 0;
+                            foreach ($orderdetails as $j => $orderdetail) {
+                                $stat = $orderdetail->order->status_bayar;
+
+                                if($stat == 'sukses' || $stat == 'pending'){
+                                    $summ = $summ + $orderdetail->jumlah;
+                                }
+
+                            }
+                            @endphp
                             <hr>
                                 <li class="nav-item">
                                     <a href="javascript: void(0)" class="nav-link visited">
@@ -56,7 +69,7 @@
                                                 @if ($tix->harga_coret != 0)
                                                 <p><span class="text-decoration-line-through fw-light" style="font-size: 1.7vh">Rp.{{number_format($tix->harga_coret)}}</span></p>
                                                 @endif
-                                                <p><span class="fw-bold">{{$tix->kuota}}</span> Tersedia</p>
+                                                <p><span class="fw-bold">{{$tix->kuota - $summ}}</span> Tersedia</p>
                                             </div>
                                         </div>
                                         <div class="other-option">

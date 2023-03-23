@@ -226,54 +226,56 @@ class OrderController extends Controller
 
     public function finishedpayment(Request $request)
     {
-        $data = (object) $_GET;
-        $order_id = $data->order_id;
+        // $data = (object) $_GET;
+        // $order_id = $data->order_id;
 
-        $string = $order_id;
-        $array = explode("-", $string);
-        $result = $array[1];
+        // $string = $order_id;
+        // $array = explode("-", $string);
+        // $result = $array[1];
 
-        if ($data->status_code == '200' && $data->transaction_status == 'capture') {
-            $order = Order::find($result);
+        // if ($data->status_code == '200' && $data->transaction_status == 'capture') {
+        //     $order = Order::find($result);
 
-            if ($order) {
-                // Update status pembayaran menjadi sukses
-                $order->status_bayar = 'sukses';
-                $order->save();
-                // // Kirim email konfirmasi ke customer
-                // Mail::to($order->email)->send(new OrderConfirmationMail($order));
-            }
-        }
+        //     if ($order) {
+        //         // Update status pembayaran menjadi sukses
+        //         $order->status_bayar = 'sukses';
+        //         $order->save();
+        //         // // Kirim email konfirmasi ke customer
+        //         // Mail::to($order->email)->send(new OrderConfirmationMail($order));
+        //     }
+        // }
 
-        return response('OK', 200);
+        // return response('OK', 200);
+        return redirect()->route('u.ticket')->with('sukses', 'Cek Tiket Kamu');
     }
 
     public function unfinishedpayment(Request $request)
     {
-        dd($_GET);
-        $payload = $request->getContent();
-        $data = json_decode($payload);
-        $order_id = $data->order_id;
+        // dd($_GET);
+        // $payload = $request->getContent();
+        // $data = json_decode($payload);
+        // $order_id = $data->order_id;
 
-        $string = $order_id;
-        $array = explode("-", $string);
-        $result = $array[1];
+        // $string = $order_id;
+        // $array = explode("-", $string);
+        // $result = $array[1];
 
-        $tix = Order::find($result);
+        // $tix = Order::find($result);
 
-        if ($data->status_code == '200' && $data->transaction_status == 'capture') {
-            $order = Order::where('id', $data->order_id)->first();
+        // if ($data->status_code == '200' && $data->transaction_status == 'capture') {
+        //     $order = Order::where('id', $data->order_id)->first();
 
-            if ($order) {
-                // Update status pembayaran menjadi sukses
-                $order->status_bayar = 'sukses';
-                $order->save();
-                // // Kirim email konfirmasi ke customer
-                // Mail::to($order->email)->send(new OrderConfirmationMail($order));
-            }
-        }
+        //     if ($order) {
+        //         // Update status pembayaran menjadi sukses
+        //         $order->status_bayar = 'sukses';
+        //         $order->save();
+        //         // // Kirim email konfirmasi ke customer
+        //         // Mail::to($order->email)->send(new OrderConfirmationMail($order));
+        //     }
+        // }
 
-        return response('OK', 200);
+        // return response('OK', 200);
+        return redirect()->route('u.ticket')->with('warning', 'Pembayaran belum selesai');
     }
 
     /**
