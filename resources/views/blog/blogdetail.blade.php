@@ -22,7 +22,7 @@
             <h2>{{$article->title}}</h2>
         </div>
         <div class="description">
-            {{!! $article->content !!}}
+            {!! $article->content !!}
         </div>
         <div class="bok-next-prev margin-t-40 margin-b-40">
             @if ($other['prev'] != null)
