@@ -63,6 +63,8 @@ class GeneralController extends Controller
             // dd($orders);
         } else {
             $orders = null;
+
+            $paidorders = null;
         }
 
         return view('ticket.ticketindex', [
