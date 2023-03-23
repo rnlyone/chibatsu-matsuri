@@ -223,7 +223,7 @@ class BlogController extends Controller
         $blog->uuid = Str::slug($validatedData['title'], '-');
         $blog->category = $validatedData['category'];
         $blog->title = $validatedData['title'];
-        $blog->content = $validatedData['content'];
+        $blog->content = nl2br($validatedData['content']);
 
 
 
