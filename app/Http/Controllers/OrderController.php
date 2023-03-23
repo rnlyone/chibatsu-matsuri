@@ -72,6 +72,10 @@ class OrderController extends Controller
     {
         $order = Order::where('uuid', $uuid)->first();
 
+        if ($order->status_bayar == "sukses") {
+            return redirect()->route('cust.invoice', ['uuid' => $order->uuid])->with('sukses', 'Order Sudah dibayar');
+        }
+
         $adminfee = Setting::where('setname', 'biaya_admin')->first()->value;
                 // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = 'SB-Mid-server-SteaebAYpn7e3tMZ6d-p-Mys';
