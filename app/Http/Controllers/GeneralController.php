@@ -58,6 +58,8 @@ class GeneralController extends Controller
         $tickets = Ticket::all();
         if(Auth::check()){
             $orders = Order::where('id_cust', auth()->user()->id)->latest()->get();
+
+            $paidorders = Order::where('id_cust', auth()->user()->id)->where('status_bayar', 'sukses')->latest()->get();
             // dd($orders);
         } else {
             $orders = null;
@@ -68,7 +70,8 @@ class GeneralController extends Controller
             $settings['baractive'] => 'active',
             'stgs' => $settings,
             'tickets' => $tickets,
-            'orders' => $orders
+            'orders' => $orders,
+            'paidorders' => $paidorders,
         ]);
     }
 

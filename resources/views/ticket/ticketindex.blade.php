@@ -208,28 +208,54 @@
             </div>
             <hr>
             @auth
-            <div class="un-navMenu-default without-visit py-3 bg-white">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link visited" href="page-my-Ticket.html">
-                            <div class="item-content-link">
-                                <div class="icon bg-green-1 color-green">
-                                    <i class="ri-ticket-line"></i>
+            @php
+                foreach ($paidorders as $i => $paid) {
+                    $jumlah[$paid->id] = 0;
+                    foreach ($paid->details as $i => $details) {
+                        $jumlah[$paid->id] = $jumlah[$paid->id] + $details->jumlah;
+                    }
+                }
+            @endphp
+            @foreach ($paidorders as $paid)
+                <div class="un-navMenu-default without-visit py-3 bg-white">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link visited" href="{{route('cust.ticket', ['uuid' => $paid->uuid])}}">
+                                <div class="item-content-link">
+                                    <div class="icon bg-green-1 color-green">
+                                        <i class="ri-ticket-line"></i>
+                                    </div>
+                                    <h3 class="link-title">#TRX-00{{$paid->id}}</h3>
                                 </div>
-                                <h3 class="link-title">#TRX-00</h3>
-                            </div>
-                            <div class="other-cc">
-                                <span class="badge-text"> 5 Ticket</span>
-                                <div class="icon-arrow">
-                                    <i class="ri-arrow-drop-right-line"></i>
+                                <div class="other-cc">
+                                    <span class="badge-text"> {{$jumlah[$paid->id]}} Ticket</span>
+                                    <div class="icon-arrow">
+                                        <i class="ri-arrow-drop-right-line"></i>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            @endforeach
+            @if ($paidorders->isEmpty())
+            <div class="empty-items">
+                <img class="empty-light" src="images/masihkosong.gif" alt="">
+                <img class="empty-dark" src="images/masihkosong.gif" alt="">
+                <h4>Belum Ada Transaksi</h4>
+                <p>Gomen, Kamu masih belum checkout tiket apapun</p>
             </div>
+            @endif
             @endauth
             @guest
+            @empty($orders)
+            <div class="empty-items">
+                <img class="empty-light" src="images/masihkosong.gif" alt="">
+                <img class="empty-dark" src="images/masihkosong.gif" alt="">
+                <h4>Belum Ada Transaksi</h4>
+                <p>Gomen, Kamu masih belum checkout tiket apapun</p>
+            </div>
+            @endempty
             <footer class="footer-account">
                 <div class="env-pb">
                     <div class="display-actions">
