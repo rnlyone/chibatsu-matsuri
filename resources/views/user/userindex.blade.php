@@ -12,7 +12,7 @@
             <div class="d-flex align-items-center">
                 <div class="user-img">
                     <picture>
-                        <source srcset="/storage/avatar/{{auth()->user()->avatar}}" type="image/webp">
+                        <source srcset="/storage/public/avatar/{{auth()->user()->avatar}}" type="image/webp">
                         <img src="images/avatar/22.jpg" alt="creator image">
                     </picture>
                     @if (auth()->user()->role == 'admin')

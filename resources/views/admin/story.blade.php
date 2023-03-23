@@ -7,7 +7,7 @@
         <h3 class="name_list">add status</h3>
         <button type="button" class="btn add-my-story" data-bs-toggle="modal" data-bs-target="#mdllAddStory">
             <div class="my_img">
-                <img src="/storage/avatar/{{auth()->user()->avatar}}" alt="my story">
+                <img src="/storage/public/avatar/{{auth()->user()->avatar}}" alt="my story">
                 <div class="icon">
                     <i class="ri-add-fill"></i>
                 </div>
