@@ -17,7 +17,7 @@
 
             <header class="default heade-sticky">
                 <div class="un-title-page go-back">
-                    @if ($stgs['title'] == ': Checkout' )
+                    @if ($stgs['title'] == ': Checkout' || $stgs['title'] == ': Invoice' )
                         <a href="{{route('u.ticket')}}" class="icon visited">
                             <i class="ri-arrow-drop-left-line"></i>
                         </a>
