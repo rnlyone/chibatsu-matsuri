@@ -229,9 +229,10 @@
                     }
                 }
             @endphp
-            @foreach ($paidorders as $paid)
+
                 <div class="un-navMenu-default without-visit py-3 bg-white">
                     <ul class="nav flex-column">
+                        @foreach ($paidorders as $paid)
                         <li class="nav-item">
                             <a class="nav-link visited" href="{{route('cust.ticket', ['uuid' => $paid->uuid])}}">
                                 <div class="item-content-link">
@@ -248,9 +249,9 @@
                                 </div>
                             </a>
                         </li>
+                        @endforeach
                     </ul>
                 </div>
-            @endforeach
             @if ($paidorders->isEmpty())
             <div class="empty-items">
                 <img class="empty-light" src="images/masihkosong.gif" alt="">
