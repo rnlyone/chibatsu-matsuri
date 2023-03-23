@@ -172,9 +172,11 @@ class OrderController extends Controller
             ])->with('sukses', 'Cek Tiket Kamu');
         }
         return view('ticket.invoice', [
-            'order' => $order,
-            'adminfee' => $adminfee,
-            'transaksi' => 'active-nav',
+                'customcss' => $customcss,
+                'stgs' => $settings,
+                'order' => $order,
+                'adminfee' => $adminfee,
+                'transaksi' => 'active-nav',
         ])->with('sukses', 'Cek Tiket Kamu');
     }
 
