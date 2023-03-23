@@ -193,7 +193,7 @@ class OrderController extends Controller
 
             return redirect()->route('cust.invoice', ['uuid' => $tix->uuid])->with('sukses', 'Cek Tiket Kamu');
         } else {
-            return redirect()->route('cust.transaction')->with('gagal', 'gagal '.$statcode);
+            return redirect()->route('cust.checkout', ['uuid' => $tix->uuid])->with('gagal', 'gagal '.$statcode);
         }
 
     }
