@@ -106,7 +106,24 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Blog',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Blog',
+                     'navactive' => '',
+                     'baractive' => ''];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        return view('admin.blog.buatartikel', [
+            'article' => $blog,
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**
