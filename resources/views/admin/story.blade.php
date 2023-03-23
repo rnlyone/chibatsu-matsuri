@@ -25,7 +25,7 @@
         <div class="nav-link">
             <div class="cover_img">
                 <picture>
-                    <source srcset="/storage/stories/{{$story->src}}" type="image/png">
+                    <source srcset="/storage/public/stories/{{$story->src}}" type="image/png">
                     <img src="images/other/11.jpg" alt="">
                 </picture>
                 <div class="txt">
@@ -193,7 +193,7 @@
                 var html = '<div id="story-'+story.id+'" class="nav-link">' +
                     '<div class="cover_img">' +
                     '<picture>' +
-                    '<source srcset="/storage/stories/' + story.src + '" type="image/png">' +
+                    '<source srcset="/storage/public/stories/' + story.src + '" type="image/png">' +
                     '<img src="images/other/11.jpg" alt="">' +
                     '</picture>' +
                     '<div class="txt">' +

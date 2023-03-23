@@ -25,7 +25,7 @@
         <div class="nav-link">
             <div class="cover_img">
                 <picture>
-                    <source srcset="/storage/slides/{{$slide->photo}}" type="image/png">
+                    <source srcset="/storage/public/slides/{{$slide->photo}}" type="image/png">
                     <img src="images/other/11.jpg" alt="">
                 </picture>
                 <div class="txt">
@@ -329,7 +329,7 @@
                 var html = '<div id="slide-'+story.id+'" class="nav-link">' +
                     '<div class="cover_img">' +
                     '<picture>' +
-                    '<source srcset="/storage/slides/' + story.photo + '" type="image/png">' +
+                    '<source srcset="/storage/public/slides/' + story.photo + '" type="image/png">' +
                     '<img src="images/other/11.jpg" alt="">' +
                     '</picture>' +
                     '<div class="txt">' +

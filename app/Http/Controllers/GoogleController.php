@@ -49,9 +49,7 @@ class GoogleController extends Controller
             $data = file_get_contents($user->avatar);
 
             // Simpan data gambar ke dalam file
-
-            Storage::makeDirectory('public/avatar');
-            Storage::put('public/avatar/' . $filename, $data, 'public');
+            Storage::storeAs('public/avatar/' . $filename, $data, 'public');
         } catch (\Throwable $th) {
             dd($th);
         }
