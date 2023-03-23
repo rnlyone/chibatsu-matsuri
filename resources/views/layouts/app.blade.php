@@ -33,6 +33,20 @@
         data-client-key="SB-Mid-client-gH_jwK69uZGaqR1S"></script>
     @endif
 
+    @if ($stgs['title'] == ": Ticket")
+    <script>
+        window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted ||
+                                    ( typeof window.performance != "undefined" &&
+                                        window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                // Handle page restore.
+                window.location.reload();
+            }
+        });
+    </script>
+    @endif
+
 
     {{-- <script>
         // Disable right-click
