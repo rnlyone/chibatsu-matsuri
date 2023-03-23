@@ -67,7 +67,7 @@
                         <!-- item-card-nft -->
                         <a href="{{$slide->link}}" class="item-card-nft">
                             <picture>
-                                <source srcset="storage/slides/{{$slide->photo}}" type="image/webp">
+                                <source srcset="/storage/public/slides/{{$slide->photo}}" type="image/webp">
                                 <img class="big-image" src="images/slides/slide2.png" alt="">
                             </picture>
                         </a>
