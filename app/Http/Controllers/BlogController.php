@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -14,7 +15,66 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        #page_setup
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Artikel',
+                        'customcss' => $customcss,
+                        'pagetitle' => 'List Artikel Blog',
+                        'navactive' => '',
+                        'baractive' => 'lombabar'];
+                        foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                        }
+
+        $blogs = Blog::all();
+
+        return view('admin.blog', [
+            'blogs' => $blogs,
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings]);
+    }
+
+    public function blogdetail($uuid)
+    {
+        $article = Blog::where('uuid', $uuid)->first();
+
+        #page_setup
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Blog',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Blog',
+                     'navactive' => '',
+                     'baractive' => ''];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        try {
+            $other['prev'] = Blog::where('id', '<', $article->id)->orderBy('id', 'desc')->first()->uuid;
+        } catch (\Throwable $th) {
+            $other['prev'] = null;
+        }
+
+        try {
+            $other['next'] = Blog::where('id', '>', $article->id)->orderBy('id', 'desc')->first()->uuid;
+        } catch (\Throwable $th) {
+            $other['next'] = null;
+        }
+
+        $latest = Blog::latest()->take(3)->get();
+
+        return view('blog.blogdetail', [
+            'article' => $article,
+            'other' => $other,
+            'latest' => $latest,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**

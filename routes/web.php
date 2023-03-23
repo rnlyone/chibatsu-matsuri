@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\GoogleController;
@@ -52,6 +53,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('/story', StoryController::class);
         Route::resource('/slide', SlideController::class);
         Route::resource('/lomba', LombaController::class);
+        Route::resource('/ourblog', BlogController::class);
     });
 
     // Route::middleware(['role:user'])->group(function () {
@@ -61,8 +63,8 @@ Route::group(['middleware'=>['auth']], function(){
     // });
 });
 
-Route::get('/bloglist', [GeneralController::class, 'blog'])->name('u.blog');
-Route::get('/blog/d/', [GeneralController::class, 'blogdetail'])->name('u.blog.detail');
+Route::get('/blog', [GeneralController::class, 'blog'])->name('u.blog');
+Route::get('/blog/d/{uuid}', [BlogController::class, 'blogdetail'])->name('u.blog.detail');
 
 
 Route::get('/menumain', function () {return view('layouts.menu-main');})->name('menumain');

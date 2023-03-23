@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Daftar;
 use App\Models\Lomba;
 use App\Models\Order;
@@ -30,12 +31,14 @@ class GeneralController extends Controller
 
         $users = User::has('stories')->with('stories')->orderByDesc('created_at')->get();
         $slides = Slide::all();
+        $latest4 = Blog::latest()->take(4)->get();
 
         // dd($users);
 
         return view('welcome', [
             'users' => $users,
             'slides' => $slides,
+            'latest4' => $latest4,
             $settings['navactive'] => '-active-links',
             $settings['baractive'] => 'active',
             'stgs' => $settings]);
@@ -178,39 +181,22 @@ class GeneralController extends Controller
         #page_setup
         $customcss = '';
         $jmlsetting = Setting::where('group', 'env')->get();
-        $settings = ['title' => ': Blog',
-                     'customcss' => $customcss,
-                     'pagetitle' => 'Blog',
-                     'navactive' => '',
-                     'baractive' => ''];
-                    foreach ($jmlsetting as $i => $set) {
+        $settings = ['title' => ': Artikel',
+                        'customcss' => $customcss,
+                        'pagetitle' => 'Artikel Blog',
+                        'navactive' => '',
+                        'baractive' => 'lombabar'];
+                        foreach ($jmlsetting as $i => $set) {
                         $settings[$set->setname] = $set->value;
-                     }
+                        }
+
+        $blogs = Blog::all();
 
         return view('blog.blogindex', [
+            'blogs' => $blogs,
+            'customcss' => $customcss,
             $settings['navactive'] => '-active-links',
             $settings['baractive'] => 'active',
             'stgs' => $settings]);
-    }
-
-    public function blogdetail()
-    {
-        #page_setup
-        $customcss = '';
-        $jmlsetting = Setting::where('group', 'env')->get();
-        $settings = ['title' => ': Blog',
-                     'customcss' => $customcss,
-                     'pagetitle' => 'Blog',
-                     'navactive' => '',
-                     'baractive' => ''];
-                    foreach ($jmlsetting as $i => $set) {
-                        $settings[$set->setname] = $set->value;
-                     }
-
-        return view('blog.blogdetail', [
-            $settings['navactive'] => '-active-links',
-            $settings['baractive'] => 'active',
-            'stgs' => $settings,
-            ]);
     }
 }

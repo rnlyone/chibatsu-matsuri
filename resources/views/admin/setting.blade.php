@@ -9,7 +9,7 @@
                     <div class="icon bg-green-1 color-green">
                         <i class="ri-wallet-line"></i>
                     </div>
-                    <h3 class="link-title">Slide Setting</h3>
+                    <h3 class="link-title">Slide List</h3>
                 </div>
                 <div class="other-cc">
                     <span class="badge-text"></span>
@@ -52,12 +52,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link visited" href="page-news-list.html">
+            <a class="nav-link visited" href="{{route('ourblog.index')}}">
                 <div class="item-content-link">
                     <div class="icon bg-pink-1 color-pink">
                         <i class="ri-file-list-2-line"></i>
                     </div>
-                    <h3 class="link-title">News List</h3>
+                    <h3 class="link-title">Blog List</h3>
                 </div>
                 <div class="other-cc">
                     <span class="badge-text"></span>
