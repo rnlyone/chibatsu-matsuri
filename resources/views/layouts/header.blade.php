@@ -15,7 +15,7 @@
             ==================================== -->
 
             <header class="default heade-sticky">
-                <a href="index.html">
+                <a href="/">
                     <div class="un-item-logo">
                         <img class="logo-img light-mode" src="/images/gakuensai_b.svg" alt="">
                         <img class="logo-img dark-mode" src="/images/gakuensai_white.svg" alt="">
@@ -23,7 +23,7 @@
                 </a>
                 <div class="un-block-right">
                     <div class="un-notification">
-                        <a href="page-activity.html" aria-label="activity">
+                        <a href="/" aria-label="activity">
                             <i class="ri-notification-line"></i>
                         </a>
                         <span class="bull-activity"></span>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -27,7 +28,7 @@ class BlogController extends Controller
                         $settings[$set->setname] = $set->value;
                         }
 
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
 
         return view('admin.blog', [
             'blogs' => $blogs,
@@ -84,7 +85,23 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Buat Artikel',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Buat Artikel',
+                     'navactive' => '',
+                     'baractive' => ''];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        return view('admin.blog.buatartikel', [
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**
@@ -95,8 +112,35 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input dari user
+        $validatedData = $request->validate([
+            'cover' => 'required|mimes:png,gif,webp|max:50000',
+            'category' => 'required|string',
+            'title' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        $file = $validatedData['cover'];
+        $fileExtension = $file->getClientOriginalExtension();
+        $fileName = uniqid() . '.' . $fileExtension;
+
+        // Simpan data ke database
+        $blog = new Blog();
+        $blog->uuid = Str::slug($validatedData['title'], '-');
+        $blog->category = $validatedData['category'];
+        $blog->title = $validatedData['title'];
+        $blog->content = $validatedData['content'];
+        $blog->cover = $fileName;
+
+        // Move uploaded file to storage
+        $file->storeAs('public/coverblog', $fileName, 'public');
+
+        $blog->save();
+
+
+        return redirect()->route('ourblog.index')->with('sukses', 'Berhasil membuat Artikel');
     }
+
 
     /**
      * Display the specified resource.
