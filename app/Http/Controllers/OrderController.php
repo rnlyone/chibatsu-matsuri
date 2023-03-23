@@ -74,6 +74,8 @@ class OrderController extends Controller
 
         if ($order->status_bayar == "sukses") {
             return redirect()->route('cust.invoice', ['uuid' => $order->uuid])->with('sukses', 'Order Sudah dibayar');
+        } elseif ($order->status_bayar == "gagal") {
+            return redirect()->route('u.ticket')->withCookie('lastTab', '#belum-bayar');
         }
 
         $adminfee = Setting::where('setname', 'biaya_admin')->first()->value;

@@ -143,7 +143,7 @@
                                 @elseif ($order->status_bayar == 'sukses')
                                     Sukses
                                 @else
-                                    gagals
+                                    gagal
                                 @endif</p>
                             </div>
                         </div>
