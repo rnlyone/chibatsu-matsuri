@@ -229,7 +229,6 @@
                     }
                 }
             @endphp
-
                 <div class="un-navMenu-default without-visit py-3 bg-white">
                     <ul class="nav flex-column">
                         @foreach ($paidorders as $paid)

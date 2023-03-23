@@ -117,8 +117,11 @@ class GeneralController extends Controller
 
             $pendaftars = Daftar::where('id_user', auth()->user()->id)->get();
 
+            $paidorders = Order::where('id_cust', auth()->user()->id)->where('status_bayar', 'sukses')->latest()->get();
+
             return view('user.userindex', [
                 'pendaftars' => $pendaftars,
+                'paidorders' => $paidorders,
                 $settings['navactive'] => '-active-links',
                 $settings['baractive'] => 'active',
                 'stgs' => $settings]);

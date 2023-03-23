@@ -36,7 +36,7 @@
     </div>
     <!-- body -->
     <div class="body">
-        <div class="item-followers">
+        {{-- <div class="item-followers">
             <div class="users-text">
                 <p>Followed by 2,5K</p>
                 <div class="img-user">
@@ -90,11 +90,10 @@
                 <p>Minted</p>
             </div>
 
-        </div>
+        </div> --}}
         <div class="description">
             <p>
-                Camillo lives in Vancouver, British Columbia. When he's not spending his time running around
-                he is probably
+                Gakuensai adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa ..
                 <a class="read-more visited" data-bs-toggle="modal" data-bs-target="#mdllBioDetails">Read more</a>
             </p>
         </div>
@@ -109,194 +108,48 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-Lomba-tab" data-bs-toggle="pill" data-bs-target="#pills-Lomba" type="button" role="tab" aria-controls="pills-Lomba" aria-selected="true">Lomba Saya</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-Profile-tab" data-bs-toggle="pill" data-bs-target="#pills-Profile" type="button" role="tab" aria-controls="pills-Profile" aria-selected="false">Profil Saya</button>
-            </li>
         </ul>
 
         <div class="tab-content content-custome-data" id="pills-tabContent">
             <div class="tab-pane fade" id="pills-Tiket" role="tabpanel" aria-labelledby="pills-Tiket-tab">
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/5.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/5.png" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Settimio Loggia</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox">
-                                <span class="count-likes">195</span>
-                                <i class="ri-heart-3-line"></i>
-                            </div>
-                        </div>
+                @php
+                    foreach ($paidorders as $i => $paid) {
+                        $jumlah[$paid->id] = 0;
+                        foreach ($paid->details as $i => $details) {
+                            $jumlah[$paid->id] = $jumlah[$paid->id] + $details->jumlah;
+                        }
+                    }
+                @endphp
+                    <div class="un-navMenu-default without-visit py-3 bg-white">
+                        <ul class="nav flex-column">
+                            @foreach ($paidorders as $paid)
+                            <li class="nav-item">
+                                <a class="nav-link visited" href="{{route('cust.ticket', ['uuid' => $paid->uuid])}}">
+                                    <div class="item-content-link">
+                                        <div class="icon bg-green-1 color-green">
+                                            <i class="ri-ticket-line"></i>
+                                        </div>
+                                        <h3 class="link-title">#TRX-00{{$paid->id}}</h3>
+                                    </div>
+                                    <div class="other-cc">
+                                        <span class="badge-text"> {{$jumlah[$paid->id]}} Ticket</span>
+                                        <div class="icon-arrow">
+                                            <i class="ri-arrow-drop-right-line"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0 visited">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/2.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/2.jpg" alt="image NFT">
-                            </picture>
-                            <div class="icon-type">
-                                <i class="ri-vidicon-line"></i>
-                            </div>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>The Dark Corner</h2>
-                                <p>8 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">3 for sale</span>
-                            </div>
-                        </div>
-
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>2.78 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-                    </div>
+                @if ($paidorders->isEmpty())
+                <div class="empty-items">
+                    <img class="empty-light" src="images/masihkosong.gif" alt="">
+                    <img class="empty-dark" src="images/masihkosong.gif" alt="">
+                    <h4>Belum Ada Transaksi</h4>
+                    <p>Gomen, Kamu masih belum checkout tiket apapun</p>
                 </div>
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/21.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/21.jpg" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Leda Beneventi</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox" checked="">
-                                <span class="count-likes">164</span>
-                                <i class="ri-heart-3-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/14.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/14.jpg" alt="image NFT">
-                            </picture>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>Galaxy on Earth</h2>
-                                <p>6 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">2 for sale</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>2.40 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn effect-click btn-md-size bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-                    </div>
-                </div>
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/13.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/13.jpg" alt="">
-                                </picture>
-
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Bruce Wheless</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox">
-                                <span class="count-likes">95</span>
-                                <i class="ri-heart-3-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/27.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/27.jpg" alt="image NFT">
-                            </picture>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>The Scary Shib</h2>
-                                <p>8 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">3 for sale</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>1.27 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-                    </div>
-                </div>
-                <!-- lds-spinner -->
-                <div class="loader-items">
-                    <div class="lds-spinner">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
+                @endif
             </div>
             <div class="tab-pane fade active show" id="pills-Lomba" role="tabpanel" aria-labelledby="pills-Lomba-tab">
 
@@ -344,385 +197,47 @@
                 </div>
                 @endif
             </div>
-            <div class="tab-pane fade" id="pills-Profile" role="tabpanel" aria-labelledby="pills-Profile-tab">
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/19.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/19.jpg" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Hunter Taylor</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox">
-                                <span class="count-likes">297</span>
-                                <i class="ri-heart-3-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/21.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/21.jpg" alt="image NFT">
-                            </picture>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>Ecstasy of the Dead</h2>
-                                <p>350 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">9 for sale</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>1.79 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-                    </div>
-                </div>
-
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/18.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/18.jpg" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Craig Leach</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox">
-                                <span class="count-likes">195</span>
-                                <i class="ri-heart-3-line"></i>
-
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/6.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/6.jpg" alt="image NFT">
-                            </picture>
-                            <div class="icon-type">
-                                <i class="ri-vidicon-line"></i>
-                            </div>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>The Moon Boi</h2>
-                                <p>14 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">2 for sale</span>
-                            </div>
-                        </div>
-
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>2.78 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-
-                    </div>
-                </div>
-
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/13.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/13.jpg" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Bruce Wheless</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox">
-                                <span class="count-likes">95</span>
-                                <i class="ri-heart-3-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/27.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/27.jpg" alt="image NFT">
-                            </picture>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>The Scary Shib</h2>
-                                <p>8 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">3 for sale</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>1.27 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-                    </div>
-                </div>
-
-                <!-- lds-spinner -->
-                <div class="loader-items">
-                    <div class="lds-spinner">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="tab-pane fade" id="pills-Liked" role="tabpanel" aria-labelledby="pills-Liked-tab">
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/19.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/19.jpg" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Hunter Taylor</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox" checked="">
-                                <span class="count-likes">297</span>
-                                <i class="ri-heart-3-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/21.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/21.jpg" alt="image NFT">
-                            </picture>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>Ecstasy of the Dead</h2>
-                                <p>350 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">9 for sale</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>1.79 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-                    </div>
-                </div>
-
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/19.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/19.jpg" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Craig Leach</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox" checked="">
-                                <span class="count-likes">195</span>
-                                <i class="ri-heart-3-line"></i>
-
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/6.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/6.jpg" alt="image NFT">
-                            </picture>
-                            <div class="icon-type">
-                                <i class="ri-vidicon-line"></i>
-                            </div>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>The Moon Boi</h2>
-                                <p>14 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">2 for sale</span>
-                            </div>
-                        </div>
-
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>2.78 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-
-                    </div>
-                </div>
-
-                <!-- item-card-gradual -->
-                <div class="item-card-gradual">
-                    <div class="head-card d-flex justify-content-between align-items-center">
-                        <div class="creator-name">
-                            <div class="image-user">
-                                <picture>
-                                    <source srcset="images/avatar/13.webp" type="image/webp">
-                                    <img class="img-avatar" src="images/avatar/13.jpg" alt="">
-                                </picture>
-                                <div class="icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                            </div>
-                            <h3>Bruce Wheless</h3>
-                        </div>
-                        <div class="btn-like-click">
-                            <div class="btnLike">
-                                <input type="checkbox" checked="">
-                                <span class="count-likes">95</span>
-                                <i class="ri-heart-3-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="page-collectibles-details.html" class="body-card py-0">
-                        <div class="cover-nft">
-                            <picture>
-                                <source srcset="images/other/27.webp" type="image/webp">
-                                <img class="img-cover" src="images/other/27.jpg" alt="image NFT">
-                            </picture>
-                            <div class="countdown-time">
-                                <span>08H 38M 16S</span>
-                            </div>
-                        </div>
-                        <div class="title-card-nft">
-                            <div class="side-one">
-                                <h2>The Scary Shib</h2>
-                                <p>8 Editions Minted</p>
-                            </div>
-                            <div class="side-other">
-                                <span class="no-sales">3 for sale</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="footer-card">
-                        <div class="starting-bad">
-                            <h4>1.27 ETH</h4>
-                            <span>Starting Bid</span>
-                        </div>
-                        <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                            Place a bid
-                        </button>
-                    </div>
-                </div>
-
-                <!-- lds-spinner -->
-                <div class="loader-items">
-                    <div class="lds-spinner">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
 
 </section>
+
+<div class="modal transition-bottom screenFull defaultModal mdlladd__rate fade" id="mdllBioDetails" tabindex="-1" aria-labelledby="modalBioDetails" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-socialNetworks">
+                    <a href="javascript: void(0)" class="btn btn-social">
+                        <img src="images/icons/facebook.svg" alt="">
+                    </a>
+                    <a href="javascript: void(0)" class="btn btn-social">
+                        <img src="images/icons/instagram.svg" alt="">
+                    </a>
+                    <a href="javascript: void(0)" class="btn btn-social">
+                        <img src="images/icons/twitter.svg" alt="">
+                    </a>
+                </div>
+                <button type="button" class="btn btnClose" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ri-close-fill"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="content-upload-item">
+                    <h2 class="size-16 weight-500 text-dark margin-b-10">Seputar Gakuensai</h2>
+                    <p>
+                        Secara etimologis, kata Gakuensai berasal dari Bahasa Jepang, dan terdiri dari dua kata, yaitu gakuen yang berarti sekolah, dan sai yang berarti festival. Secara istilah yang kami jabarkan, Gakuensai adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa sebuah festival Jepang yang melibatkan siswa dalam sekolah, luar sekolah, maupun dari instansi apapun. Gakuensai akan diisi dengan banyak runtutan acara, perlombaan, penampilan, dan juga stand-stand wirausaha dari SMA Negeri 5 sendiri. Gakuensai akan menjadi lapangan pengekspresian diri oleh semua orang yang mengikutinya, dan diperuntukkan agar dapat bermanfaat di semua aspek.
+                        Tujuan dari kegiatan Gakuensai adalah untuk memberikan kesempatan bagi siswa, masyarakat luar sekolah, dan instansi lain untuk berekspresi dan berkontribusi melalui berbagai kegiatan seperti perlombaan, penampilan, dan juga stand-stand wirausaha. Gakuensai juga bertujuan untuk menjadi lapangan bagi semua orang untuk berkembang dan bermanfaat dalam berbagai aspek, sehingga memperkaya hidup mereka dan memperluas wawasan dan pengalaman mereka.
+                    </p>
+
+                </div>
+
+            </div>
+            <div class="modal-footer border-0">
+                <div class="env-pb"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @include('layouts.footer')
