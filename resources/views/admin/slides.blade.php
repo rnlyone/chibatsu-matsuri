@@ -377,9 +377,9 @@
                 alert('Failed to create story');
                 }
             },
-            error: function() {
+            error: function($respon) {
                 // Jika terjadi error pada request, tampilkan pesan error
-                alert('wow')
+                alert($respon);
             //     let toast = `
             //         <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center place__top w-100">
             //         <div id="errortoast" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true"

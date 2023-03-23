@@ -120,10 +120,10 @@
                         <li class="nav-item">
                             <a class="nav-link {{$userbar ?? ''}}" href="page-help.html">
                                 <div class="icon_current">
-                                    <i class="ri-questionnaire-line"></i>
+                                    <i class="ri-user-line"></i>
                                 </div>
                                 <div class="icon_active">
-                                    <i class="ri-questionnaire-fill"></i>
+                                    <i class="ri-user-fill"></i>
                                 </div>
                                 <span class="title_link">User</span>
                             </a>
@@ -144,10 +144,10 @@
                         <li class="nav-item">
                             <a class="nav-link {{$lombabar ?? ''}}" href="{{route('lomba.index')}}">
                                 <div class="icon_current">
-                                    <i class="ri-hard-drive-line"></i>
+                                    <i class="ri-trophy-line"></i>
                                 </div>
                                 <div class="icon_active">
-                                    <i class="ri-hard-drive-fill"></i>
+                                    <i class="ri-trophy-fill"></i>
                                 </div>
                                 <span class="title_link">Lomba</span>
                             </a>
