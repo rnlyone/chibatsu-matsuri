@@ -27,7 +27,7 @@ Route::get('/', [GeneralController::class, 'home'])->name('welcome');
 Route::get('/ticket', [GeneralController::class, 'ticket'])->name('u.ticket');
 Route::get('/lombaku', [GeneralController::class, 'lomba'])->name('u.lomba');
 Route::get('/cast', [GeneralController::class, 'cast'])->name('u.cast');
-Route::get('/user', [GeneralController::class, 'user'])->name('u.user');
+Route::get('/myuser', [GeneralController::class, 'user'])->name('u.user');
 
 Route::group(['middleware'=>['guest']], function(){
     Route::get('/login', [UserController::class, 'flogin'])->name('flogin');
@@ -35,9 +35,9 @@ Route::group(['middleware'=>['guest']], function(){
     Route::get('/register', [UserController::class, 'fregister'])->name('fregister');
     Route::post('/register', [UserController::class, 'register'])->name('register');
 
-    // Route::fallback(function () {
-    //     return redirect()->route('flogin')->with('gagal', 'Anda harus login terlebih dahulu');
-    // });
+    Route::fallback(function () {
+        return redirect()->route('flogin')->with('gagal', 'Anda harus login terlebih dahulu');
+    });
 });
 
 Route::group(['middleware'=>['auth']], function(){
@@ -48,19 +48,22 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/invoice/{uuid}', [OrderController::class, 'finvoice'])->name('cust.invoice');
     Route::get('/myticket/{uuid}', [TicketController::class, 'index'])->name('cust.ticket');
 
+    Route::post('/updateimg/{id}', [UserController::class, 'newupdateimg'])->name('cust.updatepp');
+
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/setting', [GeneralController::class, 'setting'])->name('setting');
         Route::resource('/story', StoryController::class);
         Route::resource('/slide', SlideController::class);
         Route::resource('/lomba', LombaController::class);
         Route::resource('/ourblog', BlogController::class);
+        Route::resource('/user', UserController::class);
     });
 
-    // Route::middleware(['role:user'])->group(function () {
-    //     Route::fallback(function () {
-    //         return redirect()->route('flogin');
-    //     });
-    // });
+    Route::middleware(['role:user'])->group(function () {
+        Route::fallback(function () {
+            return redirect()->route('welcome')->with('error', 'Gomen, Ada Error');
+        });
+    });
 });
 
 Route::get('/blog', [GeneralController::class, 'blog'])->name('u.blog');

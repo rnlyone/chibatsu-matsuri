@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Jenssegers\Agent\Agent;
 
 class UserController extends Controller
@@ -99,7 +100,27 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': List User',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'List User',
+                     'subtitle' => 'List User',
+                     'navactive' => '',
+                     'baractive' => 'userbar',];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        $users = User::all();
+
+        return view('admin.user.user', [
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            'users' => $users,
+            ]);
     }
 
     /**
@@ -109,7 +130,24 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Buat User',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Buat User',
+                     'subtitle' => 'Buat User Baru disini',
+                     'navactive' => '',
+                     'baractive' => 'userbar',];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        return view('admin.user.buatuser', [
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**
@@ -120,7 +158,47 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi data yang diterima dari request
+        $validatedData = $request->validate([
+            'role' => 'required|in:admin,user',
+            'username' => [
+                'required',
+                'unique:users',
+                'regex:/^[a-z0-9_.-]+$/',
+                'max:255'
+            ],
+            'nama_lengkap' => 'required',
+            'email' => 'required|email|unique:users',
+            'no_hp' => 'nullable|numeric',
+            'instansi' => 'nullable',
+            'password' => 'required|min:8',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            'username.alpha_dash' => 'Username hanya boleh mengandung huruf, angka, tanda "-" atau "_"',
+            'username.regex' => 'Username hanya boleh mengandung huruf kecil dan tanda "-" atau "_"',
+            'username.max' => 'Username tidak boleh lebih dari 255 karakter'
+        ]);
+
+        // Mengubah username menjadi lowercase
+        $validatedData['username'] = strtolower($validatedData['username']);
+
+        $file = $request->file('avatar');
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/avatar', $fileName, 'public');
+
+        // Buat objek user baru
+        $user = new User();
+        $user->role = $validatedData['role'];
+        $user->username = $validatedData['username'];
+        $user->nama_lengkap = $validatedData['nama_lengkap'];
+        $user->email = $validatedData['email'];
+        $user->no_hp = $validatedData['no_hp'];
+        $user->instansi = $validatedData['instansi'];
+        $user->password = bcrypt($validatedData['password']);
+        $user->avatar = $fileName;
+        $user->save();
+
+        return redirect()->route('user.index')->with('sukses', 'User Berhasil dibuat');
     }
 
     /**
@@ -131,7 +209,27 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Detail User',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Detail User',
+                     'subtitle' => 'Update Data User disini',
+                     'navactive' => '',
+                     'baractive' => 'userbar',];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        $user = User::find($id);
+
+        return view('admin.user.detailuser', [
+            'user' => $user,
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**
@@ -154,7 +252,65 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $validatedData = $request->validate([
+            'role' => 'required|in:admin,user',
+            'username' => [
+                'required',
+                'unique:users,username,' . $user->id,
+                'regex:/^[a-z0-9_.-]+$/',
+                'max:255'
+            ],
+            'nama_lengkap' => 'required',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'no_hp' => 'required|numeric',
+            'instansi' => 'nullable',
+            'password' => 'nullable|min:8',
+        ], [
+            'username.alpha_dash' => 'Username hanya boleh mengandung huruf, angka, tanda "-" atau "_"',
+            'username.regex' => 'Username hanya boleh mengandung huruf kecil dan tanda "-" atau "_"',
+            'username.max' => 'Username tidak boleh lebih dari 255 karakter'
+        ]);
+
+        $user->role = $validatedData['role'];
+        $user->username = strtolower($validatedData['username']);
+        $user->nama_lengkap = $validatedData['nama_lengkap'];
+        $user->email = $validatedData['email'];
+        $user->no_hp = $validatedData['no_hp'];
+        $user->instansi = $validatedData['instansi'];
+
+        if ($validatedData['password'] != null) {
+            $user->password = $validatedData['password'];
+        }
+
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', 'Profile berhasil diupdate');
+    }
+
+    public function newupdateimg(Request $request, $id)
+    {
+        // Validate file size and aspect ratio
+        $validatedData = $request->validate([
+            'avatar' => 'required|image|max:2048',
+        ]);
+
+        // If validation passes, store the file
+        $file = $request->file('avatar');
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/avatar', $fileName, 'public');
+
+        // Update the user's profile picture
+        $user = User::find($id);
+        $user->avatar = $fileName;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Foto profile berhasil diperbarui.');
     }
 
     /**

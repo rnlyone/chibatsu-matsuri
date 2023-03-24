@@ -21,6 +21,14 @@
                         <a href="{{route('u.ticket')}}" class="icon visited">
                             <i class="ri-arrow-drop-left-line"></i>
                         </a>
+                    @elseif ($stgs['title'] == ': Detail User')
+                        <a href="{{route('user.index')}}" class="icon visited">
+                            <i class="ri-arrow-drop-left-line"></i>
+                        </a>
+                    @elseif ($stgs['title'] == ': List User')
+                        <a href="{{route('welcome')}}" class="icon visited">
+                            <i class="ri-arrow-drop-left-line"></i>
+                        </a>
                     @else
                         <a href="javascript:history.back()" class="icon visited">
                             <i class="ri-arrow-drop-left-line"></i>

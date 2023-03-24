@@ -80,8 +80,6 @@
                                 <i class="ri-coupon-3-fill"></i>
                             </div>
                             <span class="title_link">Tiket</span>
-
-                            <span class="xs-badge">8</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -94,9 +92,9 @@
                             </div>
                             <span class="title_link">Cast</span>
 
-                            <div class="badge-circle">
+                            {{-- <div class="badge-circle">
                                 <span class="doted_item"></span>
-                            </div>
+                            </div> --}}
                         </a>
                     </li>
 
@@ -118,7 +116,7 @@
                         <label class="title__label">halaman admin</label>
 
                         <li class="nav-item">
-                            <a class="nav-link {{$userbar ?? ''}}" href="page-help.html">
+                            <a class="nav-link {{$userbar ?? ''}}" href="{{route('user.index')}}">
                                 <div class="icon_current">
                                     <i class="ri-user-line"></i>
                                 </div>

@@ -35,7 +35,7 @@
             <h2>Upload Cover</h2>
             <p>Pilih foto untuk covernya</p>
             <div class="upload-input-form">
-                <input name="cover" type="file" value="{{old('cover')}}">
+                <input name="avatar" type="file" value="{{old('cover')}}">
                 <div class="content-input">
                     <div class="icon"><i class="ri-upload-cloud-line"></i></div>
                     <div class="cover_img">
