@@ -6,7 +6,12 @@ const OFFLINE_URL = '/offline';
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.add(OFFLINE_URL);
+      return cache.addAll([
+        OFFLINE_URL,
+        '/css/app.css',
+        '/js/app.js',
+        '/images/logo.png'
+      ]);
     })
   );
 });

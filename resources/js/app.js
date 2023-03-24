@@ -1,4 +1,5 @@
 import './bootstrap';
+import './sw';
 
 // app.js
 if ('serviceWorker' in navigator) {
