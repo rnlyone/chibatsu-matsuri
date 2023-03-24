@@ -97,8 +97,6 @@
             <input name="confirmpassword" type="password" class="form-control" value="{{old('password')}}" >
             <div class="size-11 color-text form-text">Password Anda</div>
         </div>
-
-        <div class="space-sticky-footer mb-5 zindex-sticky"></div>
         <div class="footer footer-pages-forms mb-5" style="z-index: 90;">
             <div class="content">
                 <div class="links-clear-data">
@@ -123,6 +121,8 @@
             Hapus Akun ini
         </button>
     </form>
+    <div class="space-sticky-footer mb-5 zindex-sticky"></div>
+
 
 </section>
 

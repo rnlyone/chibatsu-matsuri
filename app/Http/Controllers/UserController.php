@@ -285,7 +285,7 @@ class UserController extends Controller
         $user->instansi = $validatedData['instansi'];
 
         if ($validatedData['password'] != null) {
-            $user->password = $validatedData['password'];
+            $user->password = bcrypt($validatedData['password']);
         }
 
         $user->save();
