@@ -7,9 +7,9 @@ return [
         'short_name' => 'Gakuensai',
         'start_url' => '/',
         'background_color' => '#ffffff',
-        'theme_color' => '#000000',
+        'theme_color' => '#ffffff',
         'display' => 'standalone',
-        'orientation'=> 'any',
+        'orientation'=> 'portrait',
         'status_bar'=> 'black',
         'icons' => [
             '72x72' => [
@@ -73,6 +73,23 @@ return [
                 'url' => '/shortcutlink2'
             ]
         ],
-        'custom' => []
+        'custom' => [
+            "screenshots" => [
+                [
+                    "src" => "/images/ssg1.png",
+                    "sizes" => "586x1041",
+                    "type" => "image/png"
+                ],
+                [
+                    "src" => "/images/ssg2.png",
+                    "sizes" => "586x1041",
+                    "type" => "image/png"
+                ],
+                [
+                    "src" => "/images/ssg3.png",
+                    "sizes" => "586x1041",
+                    "type" => "image/png"]
+            ],
+        ]
     ]
 ];
