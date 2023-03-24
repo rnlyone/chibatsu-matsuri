@@ -74,6 +74,7 @@ Route::get('/menumain', function () {return view('layouts.menu-main');})->name('
 Route::get('/menushare', function () {return view('layouts.menu-share');})->name('menushare');
 Route::get('/menucolors', function () {return view('layouts.menu-colors');})->name('menucolors');
 Route::get('/menufooter', function () {return view('layouts.menu-footer');})->name('menufooter');
+Route::get('/offline', function () {return view('laravelpwa::offline');})->name('menufooter');
 
 
 Route::controller(FacebookController::class)->group(function(){
@@ -85,3 +86,5 @@ Route::controller(GoogleController::class)->group(function(){
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback');
 });
+
+
