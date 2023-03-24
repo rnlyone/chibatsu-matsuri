@@ -290,7 +290,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.index')->with('success', 'Profile berhasil diupdate');
+        return redirect()->route('user.index')->with('sukses', 'Profile berhasil diupdate');
     }
 
     public function newupdateimg(Request $request, $id)
