@@ -117,6 +117,7 @@
 
     <form action="{{route('user.destroy', ['user' => $user->id])}}" method="post">
         @method('DELETE')
+        @csrf
         <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus User ini?')" class="btn effect-click btn-md-size bg-red text-white rounded-pill">
             Hapus Akun ini
         </button>
