@@ -321,6 +321,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $User = User::find($id);
+
+        $User->delete();
+        return redirect()->route('user.index')->with('sukses', 'Berhasil Menghapus User');
     }
 }
