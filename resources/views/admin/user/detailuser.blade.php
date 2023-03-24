@@ -98,13 +98,6 @@
             <div class="size-11 color-text form-text">Password Anda</div>
         </div>
 
-        <form action="{{route('user.destroy', ['user' => $user->id])}}" method="post">
-            @method('DELETE')
-            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus User ini?')" class="btn effect-click btn-md-size bg-red text-white rounded-pill">
-                Hapus Akun ini
-            </button>
-        </form>
-
         <div class="space-sticky-footer mb-5 zindex-sticky"></div>
         <div class="footer footer-pages-forms mb-5" style="z-index: 90;">
             <div class="content">
@@ -122,6 +115,13 @@
                 </button>
             </div>
         </div>
+    </form>
+
+    <form action="{{route('user.destroy', ['user' => $user->id])}}" method="post">
+        @method('DELETE')
+        <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus User ini?')" class="btn effect-click btn-md-size bg-red text-white rounded-pill">
+            Hapus Akun ini
+        </button>
     </form>
 
 </section>
