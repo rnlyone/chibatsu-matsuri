@@ -279,7 +279,7 @@
       player = new YT.Player('player', {
         height: 'auto',
         width: 'auto',
-        videoId: getVideoIdFromUrl(document.getElementByClassName('player').getAttribute('data-tag-src'))
+        videoId: getVideoIdFromUrl(document.getElementById('player').getAttribute('data-tag-src'))
       });
     }
 
