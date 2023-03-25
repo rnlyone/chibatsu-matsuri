@@ -264,3 +264,33 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    // Meload API IFrame Player
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Membuat objek player
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '315',
+        width: '560',
+        videoId: getVideoIdFromUrl(document.getElementById('player').getAttribute('data-tag-src'))
+      });
+    }
+
+    function getVideoIdFromUrl(url) {
+      // Mendapatkan ID video dari URL YouTube
+      var videoId = '';
+      if (url.indexOf('youtube.com/embed/') != -1) {
+        videoId = url.split('youtube.com/embed/')[1];
+      } else if (url.indexOf('youtu.be/') != -1) {
+        videoId = url.split('youtu.be/')[1];
+      }
+      return videoId;
+    }
+    </script>
