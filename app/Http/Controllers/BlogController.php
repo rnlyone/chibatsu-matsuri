@@ -43,7 +43,27 @@ class BlogController extends Controller
         $article = Blog::where('uuid', $uuid)->first();
 
         #page_setup
-        $customcss = '';
+        $customcss = '.un-details-blog .head .cover-main-img .action-sticky
+                    {   position:absolute;
+                        top:15px;
+                        right:15px;
+                        display:flex;
+                        column-gap:15px;
+                        flex-direction:row
+                    }.un-details-blog .head .cover-main-img .action-sticky .btn-share,.un-details-blog .head .cover-main-img .action-sticky .btn-fullScreen
+                    {   width:40px;
+                        height:40px;
+                        border-radius:50%;
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:19px;
+                        background-color:var(--white);
+                        color:var(--dark)
+                    }.un-details-blog .head .cover-main-img .item-category
+                    {   position:absolute;
+                        left:15px;
+                        top:15px}';
         $jmlsetting = Setting::where('group', 'env')->get();
         $settings = ['title' => ': Blog',
                      'customcss' => $customcss,

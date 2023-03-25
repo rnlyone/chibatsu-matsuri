@@ -71,4 +71,8 @@
 
     @laravelPWA
 
+    <style>
+        {{$stgs['customcss']}}
+    </style>
+
 </head>
