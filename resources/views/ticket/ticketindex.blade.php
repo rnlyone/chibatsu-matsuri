@@ -88,12 +88,12 @@
                     </form>
                     @if ($tickets->isEmpty())
                     <hr>
-                    <div class="empty-items">
-                        <img class="empty-light" src="images/masihkosong.gif" alt="">
-                        <img class="empty-dark" src="images/masihkosong.gif" alt="">
-                        <h4>Belum Ada Tiket</h4>
-                        <p>Gomen, Belum ada tiket yang tersedia</p>
-                    </div>
+                        <div class="empty-items">
+                            <img class="empty-light" src="images/masihkosong.gif" alt="">
+                            <img class="empty-dark" src="images/masihkosong.gif" alt="">
+                            <h4>Belum Ada Tiket</h4>
+                            <p>Gomen, Belum ada tiket yang tersedia</p>
+                        </div>
                     @endif
                 </div>
                 <!-- End.content-comp -->
@@ -183,6 +183,14 @@
                 </a>
                 @endforeach
             </div>
+            <hr>
+            @if ($orders->isEmpty()) @else
+                <div class="body py-0">
+                    <p class="color-text size-13 weight-500">
+                        Jika ada masalah pada transaksi anda, hubungi CS kami. klik <a href="">disini</a>
+                    </p>
+                </div>
+            @endif
             @endauth
             @guest
             @empty($orders)
