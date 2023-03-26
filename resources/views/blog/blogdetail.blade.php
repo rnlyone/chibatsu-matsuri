@@ -274,23 +274,28 @@
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     // Membuat objek player
-    var player;
+    var players = [];
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
+    var ytPlayers = document.getElementsByClassName('yt-player');
+    for (var i = 0; i < ytPlayers.length; i++) {
+        var player = new YT.Player(ytPlayers[i], {
         height: '200',
         width: '100%',
-        videoId: getVideoIdFromUrl(document.getElementById('player').getAttribute('data-tag-src'))
-      });
+        videoId: getVideoIdFromUrl(ytPlayers[i].getAttribute('data-tag-src'))
+        });
+        players.push(player);
+    }
     }
 
     function getVideoIdFromUrl(url) {
-      // Mendapatkan ID video dari URL YouTube
-      var videoId = '';
-      if (url.indexOf('youtube.com/embed/') != -1) {
+    // Mendapatkan ID video dari URL YouTube
+    var videoId = '';
+    if (url.indexOf('youtube.com/embed/') != -1) {
         videoId = url.split('youtube.com/embed/')[1];
-      } else if (url.indexOf('youtu.be/') != -1) {
+    } else if (url.indexOf('youtu.be/') != -1) {
         videoId = url.split('youtu.be/')[1];
-      }
-      return videoId;
     }
+    return videoId;
+    }
+
     </script>
