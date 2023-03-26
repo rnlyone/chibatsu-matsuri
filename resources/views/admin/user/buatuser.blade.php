@@ -9,7 +9,7 @@
             <h6>Upload Avatar</h6>
             <p>Pilih foto untuk Avatarnya</p>
             <div class="upload-input-form">
-                <input name="cover" type="file" value="{{old('avatar')}}">
+                <input name="avatar" type="file" value="{{old('avatar')}}">
                 <div class="content-input">
                     <div class="icon"><i class="ri-upload-cloud-line"></i></div>
                     <div class="cover_img">
