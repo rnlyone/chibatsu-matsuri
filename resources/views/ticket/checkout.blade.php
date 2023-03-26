@@ -208,13 +208,11 @@
         },
         onClose: function(){
           /* You may add your own implementation here */
-          var warningmodal1 = document.getElementById("menu-warning-3");
             var toastElList = [].slice.call(document.querySelectorAll('#midwarningtoast'))
             var toastList = toastElList.map(function (toastEl) {
                 return new bootstrap.Toast(toastEl)
             });
             toastList.forEach(toast => toast.show());
-            warningmodal1.classList.add("menu-active");
         }
       });
       // customer will be redirected after completing payment pop-up
