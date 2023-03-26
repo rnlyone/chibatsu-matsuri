@@ -128,7 +128,6 @@
     </section>
 </div>
 
-@include('layouts.footer')
 
 {{-- toast khusus Sukses --}}
 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center place__center w-100">
@@ -231,3 +230,6 @@
     }
 </script>
 
+
+
+@include('layouts.footer')
