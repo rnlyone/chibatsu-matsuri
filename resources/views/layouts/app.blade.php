@@ -30,7 +30,7 @@
     @if ($stgs['title'] == ": Checkout")
         <script type="text/javascript"
         src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="SB-Mid-client-gH_jwK69uZGaqR1S"></script>
+        data-client-key="Mid-client-RdCe7DpdZjjuWmB7"></script>
     @endif
 
     @if ($stgs['title'] == ": Ticket")

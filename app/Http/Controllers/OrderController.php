@@ -80,13 +80,13 @@ class OrderController extends Controller
 
         $adminfee = Setting::where('setname', 'biaya_admin')->first()->value;
                 // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-SteaebAYpn7e3tMZ6d-p-Mys';
+        \Midtrans\Config::$serverKey = 'Mid-server-hOThKHukEZQlnuXhIU3CLT9N';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isProduction = true;
         // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
+        \Midtrans\Config::$is3ds = false;
 
         $firstname = explode(" ", auth()->user()->customer->nama_lengkap ?? auth()->user()->username)[0];
         $lastname = explode(" ", auth()->user()->customer->nama_lengkap ?? auth()->user()->username)[1] ?? "";
