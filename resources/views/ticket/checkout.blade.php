@@ -180,11 +180,9 @@
     // For example trigger on button clicked, or any time you need
     var payButton = document.getElementById('pay-button');
     payButton.addEventListener('click', function () {
-      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
       window.snap.pay('{{$snapToken}}', {
         onSuccess: function(result){
           /* You may add your own implementation here */
-          console.log(result);
           var toastElList = [].slice.call(document.querySelectorAll('#liveToastEight'))
             var toastList = toastElList.map(function (toastEl) {
                 return new bootstrap.Toast(toastEl)
@@ -194,7 +192,6 @@
         },
         onPending: function(result){
           /* You may add your own implementation here */
-            console.log(result);
             var toastElList = [].slice.call(document.querySelectorAll('#midwarningtoast'))
             var toastList = toastElList.map(function (toastEl) {
                 return new bootstrap.Toast(toastEl)
@@ -205,7 +202,6 @@
         },
         onError: function(result){
           /* You may add your own implementation here */
-          alert("payment failed!"); console.log(result);
           var warningmodal1 = document.getElementById("menu-warning-2");
             warningmodal1.classList.add("menu-active");
             sendtocontroller(result);

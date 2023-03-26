@@ -211,12 +211,14 @@ class OrderController extends Controller
         $status = $request->input('transaction_status');
         $order = Order::findOrFail($orderId);
 
-        if ($status == 'capture' || $status == 'settlement') {
-            $order->status_bayar = 'sukses';
-        } else if ($status == 'pending') {
-            $order->status_bayar = 'pending';
-        } else {
-            $order->status_bayar = 'gagal';
+        if ($order->status_bayar != 'sukses') {
+            if ($status == 'capture' || $status == 'settlement') {
+                $order->status_bayar = 'sukses';
+            } else if ($status == 'pending') {
+                $order->status_bayar = 'pending';
+            } else {
+                $order->status_bayar = 'gagal';
+            }
         }
 
         $order->save();
