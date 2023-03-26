@@ -41,7 +41,7 @@
         <div class="swiper nftSwiper swiper-initialized swiper-horizontal swiper-ios swiper-backface-hidden">
             <div class="swiper-wrapper" id="swiper-wrapper-69f8c15c87c155eb" aria-live="polite"
                 style="transform: translate3d(-1800px, 0px, 0px); transition-duration: 0ms;">
-                <div class="swiper-slide swiper-slide-duplicate-active" data-swiper-slide-index="0" role="group"
+                {{-- <div class="swiper-slide swiper-slide-duplicate-active" data-swiper-slide-index="0" role="group"
                     aria-label="1 / 4" style="width: 340px; margin-right: 20px;">
                     <!-- item-card-nft -->
                     <a href="/" class="item-card-nft">
@@ -50,7 +50,7 @@
                             <img class="big-image" src="images/slides/slide1.png" alt="">
                         </picture>
                     </a>
-                </div>
+                </div> --}}
                 @foreach ($slides as $i => $slide)
                     <div class="swiper-slide" data-swiper-slide-index="1" role="group" aria-label="{{$i+1}} / {{$slides->count()}}"
                         style="width: 340px; margin-right: 20px;">
