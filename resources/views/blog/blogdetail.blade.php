@@ -277,8 +277,8 @@
     var player;
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
-        height: 'auto',
-        width: 'auto',
+        height: '100%',
+        width: '200',
         videoId: getVideoIdFromUrl(document.getElementById('player').getAttribute('data-tag-src'))
       });
     }
