@@ -183,8 +183,8 @@
                 </a>
                 @endforeach
             </div>
-            <hr>
             @if ($orders->isEmpty()) @else
+            <hr>
                 <div class="body py-0">
                     <p class="color-text size-13 weight-500">
                         Jika ada masalah pada transaksi anda, hubungi CS kami. klik <a href="">disini</a>
