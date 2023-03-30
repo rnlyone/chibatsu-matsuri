@@ -2,7 +2,7 @@
 @include('layouts.pagetitle')
 
 
-<section class="un-page-components">
+<section class="un-page-components un-my-account">
         <div class="bg-white  pt-0 padding-20">
             <a href="page-collectibles-details.html" class="item-card-nft rounded-15">
                 <picture>
@@ -15,39 +15,37 @@
                 </picture>
             </a>
         </div>
-    </div>
     <!-- End.content-comp -->
-</section>
-
-<section class="un-my-account">
-    <div class="head">
-        <div class="my-personal-account">
-            <div class="user">
-                <picture>
-                    <source srcset="/storage/profile_pict/itsupp.png" type="image/webp">
-                    <img src="images/avatar/11.jpg" alt="">
-                </picture>
-                <div class="txt-user">
-                    <h1 id="namapengguna">Nama Pengguna</h1>
-                    <p id="usernamepengguna">username</p>
+    <div class="space-sticky-footer mb-5 zindex-sticky"></div>
+        <div class="footer footer-pages-forms mb-5" style="z-index: 90;">
+            <div class="head">
+                <div class="my-personal-account">
+                    <div class="user">
+                        <picture>
+                            <source srcset="/storage/profile_pict/itsupp.png" type="image/webp">
+                            <img src="images/avatar/11.jpg" alt="">
+                        </picture>
+                        <div class="txt-user">
+                            <h1 id="namapengguna">Nama Pengguna</h1>
+                            <p id="usernamepengguna">username</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="un-create-collectibles bg-white">
+                <div class="form-group">
+                    <label>Nama Tiket</label>
+                    <input id="nama_tiket" name="nama_tiket" type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Nomor Tiket</label>
+                    <input id="id_tiket" name="id_tiket" type="text" class="form-control" disabled>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 
-
-<div class="un-create-collectibles bg-white">
-    <div class="form-group">
-        <label>Nama Tiket</label>
-        <input id="nama_tiket" name="nama_tiket" type="text" class="form-control" disabled>
-    </div>
-    <div class="form-group">
-        <label>Nomor Tiket</label>
-        <input id="id_tiket" name="id_tiket" type="text" class="form-control" disabled>
-    </div>
-</div>
 
 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center place__top w-100">
     <div id="Toasterscangagal" class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true"
