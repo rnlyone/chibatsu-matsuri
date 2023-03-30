@@ -6,6 +6,7 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LombaController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaidtixController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TicketController;
@@ -46,17 +47,22 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     Route::post('/order/response', [OrderController::class, 'response'])->name('order.response');
     Route::get('/invoice/{uuid}', [OrderController::class, 'finvoice'])->name('cust.invoice');
-    Route::get('/myticket/{uuid}', [TicketController::class, 'index'])->name('cust.ticket');
+    Route::get('/myticket/{uuid}', [PaidtixController::class, 'index'])->name('cust.ticket');
 
     Route::post('/updateimg/{id}', [UserController::class, 'newupdateimg'])->name('cust.updatepp');
 
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/setting', [GeneralController::class, 'setting'])->name('setting');
+        Route::get('/scan', [TicketController::class, 'scan'])->name('scan');
+        Route::post('/scantiket', [TicketController::class, 'scantiket'])->name('scantiket');
         Route::resource('/story', StoryController::class);
         Route::resource('/slide', SlideController::class);
         Route::resource('/lomba', LombaController::class);
         Route::resource('/ourblog', BlogController::class);
         Route::resource('/user', UserController::class);
+        Route::resource('/ticketing', TicketController::class);
+
+
     });
 
     Route::middleware(['role:user'])->group(function () {

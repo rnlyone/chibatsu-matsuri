@@ -20,12 +20,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link visited" href="page-edit-profile.html">
+            <a class="nav-link visited" href="{{route('user.index')}}">
                 <div class="item-content-link">
                     <div class="icon bg-orange-1 color-orange">
                         <i class="ri-user-3-line"></i>
                     </div>
-                    <h3 class="link-title">Edit Profile</h3>
+                    <h3 class="link-title">User List</h3>
                 </div>
                 <div class="other-cc">
                     <span class="badge-text"></span>

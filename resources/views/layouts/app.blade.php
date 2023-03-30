@@ -32,7 +32,7 @@
         src="https://app.midtrans.com/snap/snap.js"
         data-client-key="Mid-client-RdCe7DpdZjjuWmB7"></script>
     @endif
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @if ($stgs['title'] == ": Ticket")
     <script>
         window.addEventListener( "pageshow", function ( event ) {

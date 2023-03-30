@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Paidtix;
 use App\Models\Setting;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -14,32 +15,75 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($uuid)
+    public function index()
     {
-        $order = Order::where('uuid', $uuid)->first();
-
-        if ($order->status_bayar != 'sukses') {
-            return redirect()->route('u.ticket')->with('gagal', 'Pembayaran Belum Selesai');
-        }
-
         $customcss = '';
         $jmlsetting = Setting::count();
-        $settings = ['title' => ': My Ticket',
+        $settings = ['title' => ': List Ticket',
                      'customcss' => $customcss,
-                     'pagetitle' => 'My Ticket',
+                     'pagetitle' => 'List Ticket',
                      'navactive' => 'ticketnav'];
         for ($i = 1; $i <= $jmlsetting; $i++) {
             $setting = Setting::find($i);
             $settings[$setting->setname] = $setting->value;
         }
 
-        return view('ticket.paidtix', [
+        $tickets = Ticket::all();
+
+        return view('admin.ticket.ticketindex', [
             'customcss' => $customcss,
             'stgs' => $settings,
-            'order' => $order,
+            'tickets' => $tickets,
             'transaksi' => 'active-nav',
-        ])->with('sukses', 'Cek Tiket Kamu');
+        ]);
     }
+
+    public function scan()
+    {
+        $customcss = '';
+        $jmlsetting = Setting::count();
+        $settings = ['title' => ': Scan Ticket',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Scan Ticket',
+                     'navactive' => 'ticketnav'];
+        for ($i = 1; $i <= $jmlsetting; $i++) {
+            $setting = Setting::find($i);
+            $settings[$setting->setname] = $setting->value;
+        }
+
+        return view('admin.ticket.scanner', [
+            'customcss' => $customcss,
+            'stgs' => $settings,
+        ]);
+    }
+
+    public function scantiket(Request $request)
+    {
+        // Lakukan validasi data yang diterima dari JavaScript
+        $validatedData = $request->validate([
+            'tokentiket' => 'required'
+        ]);
+
+        // Lakukan proses scanning dan simpan data yang diperlukan
+        $tokentiket = $validatedData['tokentiket'];
+
+        $tiket = Paidtix::where('token', $tokentiket)->first();
+        try {
+            $user = $tiket->orderdetail->user;
+            $nama_tiket = $tiket->orderdetail->ticket;
+
+            if ($tiket->status_tiket == 0) {
+                $tiket->status_tiket = 1;
+                $tiket->save();
+            return response()->json(['response' => 'sukses', 'message' => 'Tiket Berhasil digunakan!', 'paidtix' => $tiket, 'username' => $user->username, 'nama_user' => $user->nama_lengkap, 'nama_ticket' => $nama_tiket->nama_tiket]);
+            } else {
+            return response()->json(['response' => 'gagal', 'message' => 'Tiket Sudah Pernah digunakan!', 'paidtix' => $tiket, 'username' => $user->username, 'nama_user' => $user->nama_lengkap, 'nama_ticket' => $nama_tiket->nama_tiket]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['response' => 'gagal', 'message' => 'Tiket tidak ditemukan!']);
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +92,23 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Buat Tiket',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Buat Tiket',
+                     'navactive' => '',
+                     'baractive' => ''];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        return view('admin.ticket.buattiket', [
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**

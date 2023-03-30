@@ -116,14 +116,14 @@
                         <label class="title__label">halaman admin</label>
 
                         <li class="nav-item">
-                            <a class="nav-link {{$userbar ?? ''}}" href="{{route('user.index')}}">
+                            <a class="nav-link {{$ticketbar ?? ''}}" href="{{route('ticketing.index')}}">
                                 <div class="icon_current">
-                                    <i class="ri-user-line"></i>
+                                    <i class="ri-ticket-line"></i>
                                 </div>
                                 <div class="icon_active">
-                                    <i class="ri-user-fill"></i>
+                                    <i class="ri-ticket-fill"></i>
                                 </div>
-                                <span class="title_link">User</span>
+                                <span class="title_link">Ticket</span>
                             </a>
                         </li>
 
@@ -159,7 +159,7 @@
                                 <div class="icon_active">
                                     <i class="ri-file-info-fill"></i>
                                 </div>
-                                <span class="title_link">Pengaturan Web</span>
+                                <span class="title_link">Other</span>
                             </a>
                         </li>
                         @endif

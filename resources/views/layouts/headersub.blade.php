@@ -25,8 +25,8 @@
                         <a href="{{route('user.index')}}" class="icon visited">
                             <i class="ri-arrow-drop-left-line"></i>
                         </a>
-                    @elseif ($stgs['title'] == ': List User')
-                        <a href="{{route('welcome')}}" class="icon visited">
+                    @elseif ($stgs['title'] == (': List User' || ': List Ticket'))
+                        <a href="{{route('setting')}}" class="icon visited">
                             <i class="ri-arrow-drop-left-line"></i>
                         </a>
                     @else

@@ -15,6 +15,7 @@ class Ticket extends Model
         'harga',
         'harga_coret',
         'kuota',
+        'visibility'
     ];
 
     public function orderdetails()

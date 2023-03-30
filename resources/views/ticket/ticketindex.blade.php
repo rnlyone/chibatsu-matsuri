@@ -45,7 +45,7 @@
                     <form id="tixform" action="{{route('ordernow')}}" method="post">
                         @csrf
                         <ul class="nav flex-column">
-                            @foreach ($tickets as $tix)
+                            @foreach ($tickets->where('visibility', true) as $tix)
                             @php
                             $orderdetails = $tix->orderdetails;
 

@@ -1,4 +1,4 @@
-@include('layouts.header')
+@include('layouts.headersub')
 
 <section class="un-page-components">
     <div class="un-title-default">

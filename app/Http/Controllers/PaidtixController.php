@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Paidtix;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class PaidtixController extends Controller
@@ -12,9 +14,31 @@ class PaidtixController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($uuid)
     {
-        //
+        $order = Order::where('uuid', $uuid)->first();
+
+        if ($order->status_bayar != 'sukses') {
+            return redirect()->route('u.ticket')->with('gagal', 'Pembayaran Belum Selesai');
+        }
+
+        $customcss = '';
+        $jmlsetting = Setting::count();
+        $settings = ['title' => ': My Ticket',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'My Ticket',
+                     'navactive' => 'ticketnav'];
+        for ($i = 1; $i <= $jmlsetting; $i++) {
+            $setting = Setting::find($i);
+            $settings[$setting->setname] = $setting->value;
+        }
+
+        return view('ticket.paidtix', [
+            'customcss' => $customcss,
+            'stgs' => $settings,
+            'order' => $order,
+            'transaksi' => 'active-nav',
+        ])->with('sukses', 'Cek Tiket Kamu');
     }
 
     /**
