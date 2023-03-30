@@ -4,7 +4,7 @@
 
 <section class="un-page-components un-my-account">
         <div class="bg-white  pt-0 padding-20">
-            <a href="page-collectibles-details.html" class="item-card-nft rounded-15">
+            <div class="item-card-nft rounded-15">
                 <picture>
                     <div id="selector" class="mx-auto"></div>
                     <video id="scanner" allow="camera" style="width: 100%; height:100%; margin:auto"></video>
@@ -13,7 +13,7 @@
                     font-weight: 400;
                     margin: 0;" class="mx-auto"></p>
                 </picture>
-            </a>
+            </div>
         </div>
     <!-- End.content-comp -->
     <div class="space-sticky-footer mb-5 zindex-sticky"></div>
