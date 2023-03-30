@@ -128,11 +128,12 @@
 
             navigator.mediaDevices.getUserMedia({
                     video: { facingMode: { exact: "environment" } },
-                    mirror:true
                 })
                 .then(function (stream) {
                     scanner = new Instascan.Scanner({
-                        video: document.getElementById('scanner')
+                        video: document.getElementById('scanner'),
+                        mirror: false,
+                        scanPeriod: 5
                     });
 
 
