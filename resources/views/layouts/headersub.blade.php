@@ -29,6 +29,10 @@
                         <a href="{{route('setting')}}" class="icon visited">
                             <i class="ri-arrow-drop-left-line"></i>
                         </a>
+                    @elseif ($stgs['title'] == (': Scan Ticket'))
+                        <a href="{{route('ticketing.index')}}" class="icon visited">
+                            <i class="ri-arrow-drop-left-line"></i>
+                        </a>
                     @else
                         <a href="javascript:history.back()" class="icon visited">
                             <i class="ri-arrow-drop-left-line"></i>
