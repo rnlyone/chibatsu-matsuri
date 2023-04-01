@@ -128,9 +128,32 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function show(Ticket $ticket)
+    public function show($ticket)
     {
-        //
+        $ticket = Ticket::find($ticket);
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Buat Tiket',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Buat Tiket',
+                     'navactive' => '',
+                     'baractive' => ''];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        $paidtix = Paidtix::get();
+        $paidtix = $paidtix->filter(function ($item) use ($ticket) {
+        return $item->orderdetail->ticket->id == $ticket->id;
+        });
+
+        return view('admin.ticket.detailticket', [
+            'customcss' => $customcss,
+            'paidtix' => $paidtix,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**
