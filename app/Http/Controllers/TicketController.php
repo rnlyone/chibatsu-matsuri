@@ -144,8 +144,9 @@ class TicketController extends Controller
 
         $paidtix = Paidtix::get();
         $paidtix = $paidtix->filter(function ($item) use ($ticket) {
-        return $item->orderdetail->ticket->id == $ticket->id;
+            return $item->orderdetail->ticket->id == $ticket->id && $item->orderdetail->order->status_bayar == 'sukses';
         });
+
 
         return view('admin.ticket.detailticket', [
             'customcss' => $customcss,
