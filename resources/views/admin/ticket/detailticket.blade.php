@@ -25,7 +25,7 @@
                     <div class="nav-link visited">
                         <div class="item-user-img">
                             <picture>
-                                <source srcset="storage/public/avatar/{{$tix->orderdetail->user->avatar}}" type="image/webp">
+                                <source srcset="/storage/public/avatar/{{$tix->orderdetail->user->avatar}}" type="image/webp">
                                 <img class="avt-img" src="images/avatar/13.jpg" alt="">
                             </picture>
                             <div class="txt-user">
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="other-option">
-                            @if ($tix->status_tiket == '0')
+                            @if ($tix->status_tiket == '1')
                                 <div class="rounded-pill bg-danger btn-xs-size" style="color: white">Sudah Digunakan</div>
                             @else
                                 <div class="rounded-pill bg-success btn-xs-size" style="color: white">Belum Digunakan</div>
