@@ -1,5 +1,30 @@
 @include('layouts.header')
-@include('layouts.pagetitle')
+<section class="un-page-components">
+    <div class="un-title-default">
+        <div class="text">
+            <h2>{{$stgs['pagetitle']}}</h2>
+            <p>Pilih Lomba yang akan kamu ikuti pada {{$stgs['nama_aplikasi']}}</p>
+        </div>
+    </div>
+</section>
+
+
+@auth
+@if (auth()->user()->no_hp == null || auth()->user()->instansi == null)
+<div class="bg-white padding-20 mt-0 mb-0 pb-0">
+    <div class="alert alert-warning" role="alert">
+        Kamu belum bisa mendaftar lomba, kamu perlu melengkapi informasi akun kamu,
+        <a href="{{route('cust.edit')}}" class="alert-link">klik disini</a> untuk melengkapi informasi.
+    </div>
+</div>
+@else
+<div class="bg-white padding-20 mt-0 mb-0 pb-0">
+    <div class="alert alert-info" role="alert">
+        Kamu sudah bisa mendaftar lomba, tapi kamu hanya bisa memilih 1 lomba untuk didaftar.
+    </div>
+</div>
+@endif
+@endauth
 
 @foreach ($lombas as $lomba)
     <div class="bg-white padding-20">
@@ -8,14 +33,14 @@
             <a data-bs-toggle="modal" data-bs-target="#mdllCollectibles{{$lomba->id}}" class="body-card">
                 <div class="cover-nft">
                     <picture>
-                        <source srcset="images/other/{{$lomba->src}}" type="image/webp">
-                        <img class="img-cover" src="images/other/{{$lomba->src}}" alt="image NFT">
+                        <source srcset="/storage/public/coverlomba/{{$lomba->src}}" type="image/webp">
+                        <img class="img-cover" src="/storage/public/coverlomba/{{$lomba->src}}" alt="image NFT">
                     </picture>
                 </div>
                 <div class="title-card-nft">
                     <div class="side-one">
                         <h2>{{$lomba->nama_lomba}}</h2>
-                        <p>{{$lomba->deskripsi}}</p>
+                        <p>{{$lomba->level}}</p>
                     </div>
                     <div class="side-other">
                         <span class="no-sales"></span>
@@ -25,11 +50,18 @@
             <div class="footer-card">
                 <div class="starting-bad">
                     <span>Terbuka Untuk</span>
-                    <h4>{{$lomba->persyaratan}}</h4>
+                    <h4>{{$lomba->terbuka_untuk}}</h4>
                 </div>
-                <button type="button" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
-                    Daftar
-                </button>
+                @auth
+                        <button data-bs-toggle="modal" data-bs-target="#mdllCollectibles{{$lomba->id}}" type="submit" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
+                            Daftar
+                        </button>
+                @endauth
+                @guest
+                    <a href="{{route('login')}}" class="btn btn-md-size effect-click bg-primary text-white rounded-pill">
+                        Login
+                    </a>
+                @endguest
 
             </div>
         </div>
@@ -71,11 +103,10 @@
                         <div class="head">
                             <div class="cover-main-img mt-0">
                                 <picture>
-                                    <source srcset="/images/other/{{$lomba->src}}" type="image/webp">
-                                    <img class="img-full" src="/images/other/{{$lomba->src}}" alt="">
+                                    <source srcset="/storage/public/coverlomba/{{$lomba->src}}" type="image/webp">
+                                    <img class="img-full" src="/storage/public/coverlomba/{{$lomba->src}}" alt="">
                                 </picture>
-                                <span class="btn-xs-size bg-dark text-white rounded-pill item-category">Digital
-                                    Art</span>
+                                <span class="btn-xs-size bg-dark text-white rounded-pill item-category">{{$lomba->terbuka_untuk}}</span>
                                 <div class="action-sticky">
                                     <button type="button" class="btn btn-fullScreen">
                                         <i class="ri-fullscreen-fill"></i>
@@ -87,35 +118,10 @@
                                 </div>
                             </div>
 
-                            <div class="title-card-text d-flex align-items-center justify-content-between">
-                                <a href="page-creator-profile.html" class="item-profile-creator visited">
-                                    <div class="wrapper-image">
-                                        <picture>
-                                            <source srcset="images/avatar/14.webp" type="image/webp">
-                                            <img class="avt-img" src="images/avatar/14.jpg" alt="image">
-                                        </picture>
-                                        <div class="icon"><i class="ri-checkbox-circle-fill"></i></div>
-                                    </div>
-                                    <div class="txt-user">
-                                        <h5>Creator</h5>
-                                        <p>Shelly Villa</p>
-                                    </div>
-                                </a>
-                                <div class="btn-like-click shape-box">
-                                    <div class="btnLike">
-                                        <input type="checkbox">
-                                        <span class="count-likes">3,62 K</span>
-                                        <div class="icon-inside">
-                                            <i class="ri-heart-3-line"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="txt-price-coundown d-flex justify-content-between">
                                 <div class="price">
-                                    <h2>Starting Bid</h2>
-                                    <p>2.3 <span class="size-16">ETH</span> <span class="dollar">($8,350)</span></p>
+                                    <h2>Biaya Pendaftaran</h2>
+                                    <p><span class="size-16">Rp.</span>{{number_format($lomba->biaya)}}</p>
                                 </div>
                                 <!-- <div class="coundown">
                                 <h3>Auction Ends In</h3>
@@ -125,236 +131,80 @@
                         </div>
                         <!-- body -->
                         <div class="body">
-                            <div class="description">
-                                <p>
-                                    Focus on your breath as this soothing opens and closes endlessly.
-                                </p>
-                            </div>
-                            <ul class="nav nav-pills nav-pilled-tab" id="pills-tab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-Owner-tab" data-bs-toggle="pill"
-                                        data-bs-target="#pills-Owner" type="button" role="tab"
-                                        aria-controls="pills-Owner" aria-selected="true">Owner</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-History-tab" data-bs-toggle="pill"
-                                        data-bs-target="#pills-History" type="button" role="tab"
-                                        aria-controls="pills-History" aria-selected="false">History</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-Bids-tab" data-bs-toggle="pill"
-                                        data-bs-target="#pills-Bids" type="button" role="tab" aria-controls="pills-Bids"
-                                        aria-selected="false">Bids</button>
-                                </li>
-                            </ul>
-
-                            <div class="tab-content content-custome-data" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-Info" role="tabpanel"
-                                    aria-labelledby="pills-Info-tab">
-                                    <ul class="nav flex-column nav-users-profile margin-t-20">
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/14.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/14.jpg" alt="">
-                                                        </picture>
-
-                                                        <div class="icon"><i class="ri-checkbox-circle-fill"></i></div>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>Creator</h5>
-                                                        <p>Shelly Villa</p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/13.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/13.jpg" alt="">
-                                                        </picture>
-                                                        <div class="icon"><i class="ri-checkbox-circle-fill"></i></div>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>Owner</h5>
-                                                        <p>Ausonio_Loi</p>
-                                                    </div>
-                                                </a>
-                                                <div class="other-option">
-                                                    <button type="button" class="btn btn-copy-address">
-                                                        <input type="checkbox">
-                                                        <span>0xe388...e162</span>
-                                                        <div class="icon-box">
-                                                            <i class="ri-file-copy-2-line"></i>
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                    </ul>
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Deskripsi
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {!! nl2br($lomba->deskripsi) !!}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane fade" id="pills-Owner" role="tabpanel"
-                                    aria-labelledby="pills-Owner-tab">
-
-                                    <ul class="nav flex-column nav-users-profile margin-t-20">
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/13.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/13.jpg" alt="">
-                                                        </picture>
-                                                        <div class="icon"><i class="ri-checkbox-circle-fill"></i></div>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>Owner</h5>
-                                                        <p>Ausonio_Loi</p>
-                                                    </div>
-                                                </a>
-                                                <div class="other-option">
-                                                    <button type="button" class="btn btn-copy-address">
-                                                        <input type="checkbox">
-                                                        <span>0xe388...e162</span>
-                                                        <div class="icon-box">
-                                                            <i class="ri-file-copy-2-line"></i>
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Persyaratan
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {!! nl2br($lomba->persyaratan) !!}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane fade" id="pills-History" role="tabpanel"
-                                    aria-labelledby="pills-History-tab">
-                                    <ul class="nav flex-column nav-users-profile margin-t-20">
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/8.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/8.png" alt="">
-                                                        </picture>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>16 days ago</h5>
-                                                        <p class="weight-400 size-14"><span class="color-text">Bought
-                                                                by</span>
-                                                            smally <span class="color-text">for</span> <span
-                                                                class="color-green">
-                                                                $300.00</span></p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/17.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/17.jpg" alt="">
-                                                        </picture>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>24 days ago</h5>
-                                                        <p class="weight-400 size-14">
-                                                            <span class="color-text">
-                                                                Bid placed by </span> Pingu
-                                                            <span class="color-text">for</span> <span
-                                                                class="color-green">
-                                                                $150.00</span>
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/18.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/18.jpg" alt="">
-                                                        </picture>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>26 days ago</h5>
-                                                        <p class="weight-400 size-14">
-                                                            <span class="color-text">
-                                                                Bid placed by </span> Vinicius
-                                                            <span class="color-text">for</span> <span
-                                                                class="color-green">
-                                                 2               $250.00</span>
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <div class="tab-pane fade" id="pills-Bids" role="tabpanel"
-                                    aria-labelledby="pills-Bids-tab">
-                                    <ul class="nav flex-column nav-users-profile margin-t-20">
-
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/12.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/12.png" alt="">
-                                                        </picture>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>24 days ago</h5>
-                                                        <p class="weight-400 size-14">
-                                                            Pingu
-                                                            <span class="color-text">
-                                                                bid for</span>
-                                                            <span class="color-green">
-                                                                $300.00</span>
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <a href="page-creator-profile.html" class="item-user-img visited">
-                                                    <div class="wrapper-image">
-                                                        <picture>
-                                                            <source srcset="images/avatar/7.webp" type="image/webp">
-                                                            <img class="avt-img" src="images/avatar/7.jpg" alt="">
-                                                        </picture>
-                                                    </div>
-                                                    <div class="txt-user">
-                                                        <h5>24 days ago</h5>
-                                                        <p class="weight-400 size-14">
-                                                            Pingu
-                                                            <span class="color-text">
-                                                                bid for</span>
-                                                            <span class="color-green">
-                                                                $300.00</span>
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-
-                                    </ul>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#juknisaccordion" aria-expanded="false" aria-controls="juknisaccordion">
+                                            Juknis
+                                        </button>
+                                    </h2>
+                                    <div id="juknisaccordion" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <a href="{{$lomba->juknis}}">Klik Disini Untuk Mengakses Juknis</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="space-sticky"></div>
+                            <div class="space-sticky"></div>
+                        <div class="modal-footer justify-content-center border-0 pt-2">
+                            <div class="footer-pages-forms">
+                                <div class="content">
+                                    <div class="links-clear-data">
+                                        <button type="button" class="btn link-clear" data-bs-toggle="modal"
+                                            data-bs-dismiss="modal">
+                                            <i class="ri-close-circle-line"></i>
+                                            <span>Cancel</span>
+                                        </button>
+                                    </div>
+                                    @auth
+                                    <form action="{{route('daftarlomba')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="idLomba" value="{{$lomba->id}}">
+                                        <button type="submit" class="btn btn-bid-items">
+                                            <p>Daftar Lomba</p>
+                                            <div class="ico">
+                                                <i class="ri-arrow-drop-right-line"></i>
+                                            </div>
+                                        </button>
+                                    </form>
+                                    @endauth
+                                    @guest
+                                    <a href="{{route('login')}}" class="btn btn-bid-items">
+                                        <p>Daftar Lomba</p>
+                                        <div class="ico">
+                                            <i class="ri-arrow-drop-right-line"></i>
+                                        </div>
+                                    </a>
+                                    @endguest
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

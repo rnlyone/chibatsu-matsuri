@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('daftars', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_lomba')->constrained('lombas')->onDelete('cascade');
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
-            $table->foreignId('id_tim')->constrained('tims')->onDelete('cascade');
-            $table->boolean('status_bayar');
+        Schema::table('daftars', function (Blueprint $table) {
             $table->enum('status_daftar', ['ditolak', 'ditinjau', 'diterima']);
             $table->text('catatan');
-            $table->timestamps();
-
         });
     }
 
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daftars');
+        //
     }
 };

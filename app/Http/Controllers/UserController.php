@@ -232,6 +232,31 @@ class UserController extends Controller
             ]);
     }
 
+    public function usershow()
+    {
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Detail User',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Detail User',
+                     'subtitle' => 'Update Data User disini',
+                     'navactive' => '',
+                     'baractive' => 'userbar',];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        $user = User::find(auth()->user()->id);
+
+        return view('admin.user.detailuser', [
+            'user' => $user,
+            'customcss' => $customcss,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

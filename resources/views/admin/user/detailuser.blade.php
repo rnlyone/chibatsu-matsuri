@@ -52,13 +52,15 @@
     <form action="{{route('user.update', ['user' => $user->id])}}" method="post">
         @method('PUT')
         @csrf
-        <div class="form-group">
-            <label>Role</label>
-            <select name="role" class="form-select form-control custom-select" aria-label="Default select example">
-                <option @if ($user->role == 'user') selected="" @endif value="user">User Biasa</option>
-                <option @if ($user->role == 'admin') selected="" @endif value="admin">Admin</option>
-            </select>
-        </div>
+        @if (auth()->user()->role == 'admin')
+            <div class="form-group">
+                <label>Role</label>
+                <select name="role" class="form-select form-control custom-select" aria-label="Default select example">
+                    <option @if ($user->role == 'user') selected="" @endif value="user">User Biasa</option>
+                    <option @if ($user->role == 'admin') selected="" @endif value="admin">Admin</option>
+                </select>
+            </div>
+        @endif
         <div class="form-group">
             <label>username</label>
             <input name="username" type="text" class="form-control" placeholder="username" value="{{old('username') ?? $user->username}}" pattern="[a-z0-9_.-]+">
@@ -88,14 +90,14 @@
 
         <div class="form-group">
             <label>Password</label>
-            <input name="password" type="password" class="form-control" value="{{old('password')}}" >
+            <input name="password" type="password" class="form-control" value="{{old('password')}}" placeholder="jangan diisi ketika tidak ingin diubah" >
             <div class="size-11 color-text form-text">Password Anda</div>
         </div>
 
         <div class="form-group">
             <label>Konfirmasi Password</label>
-            <input name="confirmpassword" type="password" class="form-control" value="{{old('password')}}" >
-            <div class="size-11 color-text form-text">Password Anda</div>
+            <input name="confirmpassword" type="password" placeholder="jangan diisi ketika tidak ingin diubah" class="form-control" value="{{old('password')}}" >
+            <div class="size-11 color-text form-text">Konfirmasi Password Anda</div>
         </div>
         <div class="footer footer-pages-forms mb-5" style="z-index: 90;">
             <div class="content">
@@ -115,6 +117,7 @@
         </div>
     </form>
 
+    @if (auth()->user()->role == 'admin')
     <form action="{{route('user.destroy', ['user' => $user->id])}}" method="post">
         @method('DELETE')
         @csrf
@@ -122,6 +125,7 @@
             Hapus Akun ini
         </button>
     </form>
+    @endif
     <div class="space-sticky-footer mb-5 zindex-sticky"></div>
 
 

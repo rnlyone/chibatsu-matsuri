@@ -86,15 +86,29 @@ class GeneralController extends Controller
         $customcss = '';
         $jmlsetting = Setting::where('group', 'env')->get();
         $settings = ['title' => ': Lomba',
-                     'customcss' => $customcss,
-                     'pagetitle' => 'Lomba',
-                     'navactive' => 'lombanav',
-                     'baractive' => 'lombabar'];
+                    'customcss' => $customcss,
+                    'pagetitle' => 'Lomba',
+                    'navactive' => 'lombanav',
+                    'baractive' => 'lombabar'];
                     foreach ($jmlsetting as $i => $set) {
                         $settings[$set->setname] = $set->value;
                     }
 
         $lombas = Lomba::all();
+
+        if(Auth::check()){
+            $user = User::find(auth()->user()->id);
+
+            if ($user->daftars()->exists()) {
+                $daftar = Daftar::where('id_user', $user->id)->first();
+                return view('lomba.daftarindex', [
+                    'lombas' => $lombas,
+                    'daftar' => $daftar,
+                    $settings['navactive'] => '-active-links',
+                    $settings['baractive'] => 'active',
+                    'stgs' => $settings]);
+            }
+        }
 
         return view('lomba.lombaindex', [
             'lombas' => $lombas,

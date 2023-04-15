@@ -13,16 +13,20 @@ class Lomba extends Model
         'nama_lomba',
         'kuota',
         'deskripsi',
+        'sinopsis',
         'persyaratan',
         'juknis',
         'biaya',
         'level',
+        'terbuka_untuk',
         'visibilitas',
-        'src'
+        'src',
+        'catatan',
+        'gruplink'
     ];
 
     public function daftars()
     {
-        return $this->hasOne(Daftar::class, 'id_lomba');
+        return $this->hasMany(Daftar::class, 'id_lomba');
     }
 }

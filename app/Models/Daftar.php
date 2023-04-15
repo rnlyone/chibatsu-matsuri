@@ -12,7 +12,10 @@ class Daftar extends Model
     protected $fillable = [
         'id_lomba',
         'id_user',
-        'status_bayar'
+        'id_tim',
+        'status_bayar',
+        'status_daftar',
+        'catatan',
     ];
 
     public function user()

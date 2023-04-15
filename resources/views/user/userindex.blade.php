@@ -26,12 +26,11 @@
                     <p>{{auth()->user()->username}}</p>
                 </div>
             </div>
-            <button type="button" class="btn btn-copy-address mt-3">
-                <input type="checkbox">
+            <a href="{{route('cust.edit')}}" class="btn btn-copy-address mt-3">
                 <div class="icon-box">
-                    <i class="ri-file-copy-2-line"></i>
+                    <i class="ri-edit-2-line"></i>
                 </div>
-            </button>
+            </a>
         </div>
     </div>
     <!-- body -->
@@ -96,7 +95,16 @@
                 Gakuensai adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa ..
                 <a class="read-more visited" data-bs-toggle="modal" data-bs-target="#mdllBioDetails">Read more</a>
             </p>
+            @if (auth()->user()->no_hp == null || auth()->user()->instansi == null)
+                <div class="bg-white mt-3 mb-0 pb-0">
+                    <div class="alert alert-warning" role="alert">
+                        Profile Kamu Belum Lengkap,
+                        <a href="{{route('cust.edit')}}" class="alert-link">klik disini</a> untuk melengkapi informasi.
+                    </div>
+                </div>
+            @endif
         </div>
+
     </div>
 
     <div class="tab-creatore-profile">
@@ -155,26 +163,26 @@
 
                 <div class="un-myItem-list bg-white">
                     @foreach ($pendaftars as $pendaftar)
-                    <a href="{{route('cust.checkout', ['uuid' => $pendaftar->uuid])}}" class="nav flex-column" style="text-decoration: none">
+                    <a href="{{route('cust.mylomba', ['uuid' => $pendaftar->id])}}" class="nav flex-column" style="text-decoration: none">
                         <div class="nav-link">
                             <div class="cover_img">
                                 <div class="txt">
-                                    <h2>#TRX-00{{$pendaftar->id}}</h2>
-                                    <p>@if ($pendaftar->status_bayar == '0')
-                                        Belum Bayar
-                                    @elseif ($pendaftar->status_bayar == '1')
-                                        Sukses
+                                    <h2>{{$pendaftar->lomba->nama_lomba}}</h2>
+                                    <p>@if ($pendaftar->status_daftar == 'ditinjau')
+                                        ditinjau
+                                    @elseif ($pendaftar->status_daftar == 'ditolak')
+                                        ditolak
                                     @else
-                                        gagals
+                                        diterima
                                     @endif</p>
                                 </div>
                             </div>
                             <div class="other-side">
-                                @if ($pendaftar->status_bayar == '0')
+                                @if ($pendaftar->status_daftar == 'ditinjau')
                                     <a href="#" class="out-link-warning">
                                         <i class="ri-check-line"></i>
                                     </a>
-                                @elseif ($pendaftar->status_bayar == '1')
+                                @elseif ($pendaftar->status_daftar == 'diterima')
                                     <a href="#" class="out-link-success">
                                         <i class="ri-check-line"></i>
                                     </a>

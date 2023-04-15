@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\GoogleController;
@@ -48,8 +49,14 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/order/response', [OrderController::class, 'response'])->name('order.response');
     Route::get('/invoice/{uuid}', [OrderController::class, 'finvoice'])->name('cust.invoice');
     Route::get('/myticket/{uuid}', [PaidtixController::class, 'index'])->name('cust.ticket');
+    Route::get('/mylomba/{uuid}', [DaftarController::class, 'ShowDaftarSaya'])->name('cust.mylomba');
 
     Route::post('/updateimg/{id}', [UserController::class, 'newupdateimg'])->name('cust.updatepp');
+    Route::post('/daftarlomba', [DaftarController::class, 'daftarlomba'])->name('daftarlomba');
+    Route::post('/updatecatatan', [DaftarController::class, 'updatecatatan'])->name('updatelomba');
+    Route::post('/updatecatatanadmin/{id}', [DaftarController::class, 'updatecatatanadmin'])->name('updatelombaadmin');
+
+    Route::get('/editprofile', [UserController::class, 'usershow'])->name('cust.edit');
 
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/setting', [GeneralController::class, 'setting'])->name('setting');
@@ -61,7 +68,6 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('/ourblog', BlogController::class);
         Route::resource('/user', UserController::class);
         Route::resource('/ticketing', TicketController::class);
-
 
     });
 
