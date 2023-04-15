@@ -46,7 +46,7 @@ class DaftarController extends Controller
 
     public function daftarlomba(Request $r)
     {
-        if (auth()->user()->no_hp != null || auth()->user()->instansi != null) {
+        if (auth()->user()->no_hp != null && auth()->user()->instansi != null) {
             $lomba = Lomba::find($r->idLomba);
 
             $daftar = new Daftar();
