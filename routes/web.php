@@ -57,6 +57,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('/updatecatatanadmin/{id}', [DaftarController::class, 'updatecatatanadmin'])->name('updatelombaadmin');
 
     Route::get('/editprofile', [UserController::class, 'usershow'])->name('cust.edit');
+    Route::put('/updateprofile/{id}', [UserController::class, 'update'])->name('cust.update');
 
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/setting', [GeneralController::class, 'setting'])->name('setting');

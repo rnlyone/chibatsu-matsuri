@@ -280,7 +280,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         $validatedData = $request->validate([
-            'role' => 'required|in:admin,user',
+            'role' => 'in:admin,user',
             'username' => [
                 'required',
                 'unique:users,username,' . $user->id,
@@ -302,7 +302,10 @@ class UserController extends Controller
             'username.max' => 'Username tidak boleh lebih dari 255 karakter'
         ]);
 
-        $user->role = $validatedData['role'];
+        if ($request->role != null) {
+            $user->role = $validatedData['role'];
+        }
+
         $user->username = strtolower($validatedData['username']);
         $user->nama_lengkap = $validatedData['nama_lengkap'];
         $user->email = $validatedData['email'];
@@ -315,7 +318,12 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.index')->with('sukses', 'Profile berhasil diupdate');
+        if (auth()->user()->role == 'admin') {
+            return redirect()->route('user.index')->with('sukses', 'Profile berhasil diupdate');
+        } else {
+            return redirect()->route('u.user')->with('sukses', 'Profile berhasil diupdate');
+        }
+
     }
 
     public function newupdateimg(Request $request, $id)

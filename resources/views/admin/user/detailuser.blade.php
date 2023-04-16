@@ -49,7 +49,11 @@
 
 <section class="padding-20 form-edit-profile margin-b-20">
 
-    <form action="{{route('user.update', ['user' => $user->id])}}" method="post">
+    @if (auth()->user()->role == 'admin')
+        <form action="{{route('user.update', ['user' => $user->id])}}" method="post">
+    @else
+        <form action="{{route('cust.update', ['id' => $user->id])}}" method="post">
+    @endif
         @method('PUT')
         @csrf
         @if (auth()->user()->role == 'admin')
