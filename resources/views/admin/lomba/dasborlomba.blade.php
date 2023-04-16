@@ -220,7 +220,7 @@
                             <div class="footer-pages-forms">
                                 <div class="content">
                                     <div class="links-clear-data">
-                                        <button type="button" id="saveonly" class="btn link-clear" data-bs-toggle="modal"
+                                        <button type="button" id="saveonly" class="btn link-clear" data-bs-toggle="modal" onclick="document.getElementById('updateform').submit()"
                                             data-bs-dismiss="modal">
                                             <span>Save Saja</span>
                                         </button>
