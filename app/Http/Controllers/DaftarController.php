@@ -78,8 +78,7 @@ class DaftarController extends Controller
 
     public function updatecatatanadmin(Request $r, $id)
     {
-        $user = User::find($id);
-        $daftar = Daftar::where('id_user', $user->id)->first();
+        $daftar = Daftar::find($id);
 
         if ($daftar->status_daftar == 'ditinjau') {
             if ($r->saveonly == 0) {
