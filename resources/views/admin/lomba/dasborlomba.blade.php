@@ -157,7 +157,7 @@
                                 @endif
                             </h6>
                         @endif
-                        <form action="{{route('updatelombaadmin', ['id' => $daftar->id])}}" method="post" id="updateform">
+                        <form action="{{route('updatelombaadmin', ['id' => $daftar->id])}}" method="post" id="updateform{{$daftar->id}}">
                             @csrf
                             <input type="hidden" name="saveonly" value="0">
                             <div class="form-group">
@@ -226,14 +226,14 @@
                                         </button>
                                     </div>
                                     @if ($daftar->status_daftar == 'ditinjau')
-                                    <button type="submit" class="btn btn-bid-items" onclick="document.getElementById('updateform').submit()">
+                                    <button type="submit" class="btn btn-bid-items" onclick="document.getElementById('updateform{{$daftar->id}}').submit()">
                                         <p>Save & Terima</p>
                                         <div class="ico">
                                             <i class="ri-arrow-drop-right-line"></i>
                                         </div>
                                     </button>
                                     @else
-                                    <button type="submit" class="btn btn-bid-items" onclick="document.getElementById('updateform').submit()">
+                                    <button type="submit" class="btn btn-bid-items" onclick="document.getElementById('updateform{{$daftar->id}}').submit()">
                                         <p>Save & Terbayar</p>
                                         <div class="ico">
                                             <i class="ri-arrow-drop-right-line"></i>
@@ -243,7 +243,7 @@
                                     <script>
                                         document.querySelector('#saveonly').addEventListener('click', function() {
                                             document.querySelector('input[name="saveonly"]').value = 1;
-                                            document.getElementById('updateform').submit()
+                                            document.getElementById('updateform{{$daftar->id}}').submit()
                                         });
                                     </script>
                                 </div>
