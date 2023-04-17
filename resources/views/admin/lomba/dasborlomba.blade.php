@@ -159,7 +159,7 @@
                         @endif
                         <form action="{{route('updatelombaadmin', ['id' => $daftar->id])}}" method="post" id="updateform{{$daftar->id}}">
                             @csrf
-                            <input type="hidden" name="saveonly" value="0">
+                            <input id="saveonlyinput{{$daftar->id}}" type="hidden" name="saveonly" value="0">
                             <div class="form-group">
                                 <label>Id Pendaftaran</label>
                                 <input name="id_daftar" @readonly(true) type="text" class="form-control" value="gf23-{{$daftar->lomba->id}}-{{$daftar->id}}">
@@ -242,7 +242,7 @@
                                     @endif
                                     <script>
                                         document.querySelector('#saveonly{{$daftar->id}}').addEventListener('click', function() {
-                                            document.querySelector('input[name="saveonly"]').value = 1;
+                                            document.querySelector('#saveonlyinput{{$daftar->id}}').value = 1;
                                             document.getElementById('updateform{{$daftar->id}}').submit()
                                         });
                                     </script>
