@@ -100,8 +100,6 @@ class DaftarController extends Controller
             $daftar->catatan = $r->catatan;
         }
 
-
-
         $daftar->save();
         return back()->with('sukses', 'Yatta, Kamu Berhasil Update Catatan');
     }

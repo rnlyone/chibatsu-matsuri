@@ -162,7 +162,7 @@
                             <input type="hidden" name="saveonly" value="0">
                             <div class="form-group">
                                 <label>Id Pendaftaran</label>
-                                <input name="id_daftar" @readonly(true) type="text" class="form-control" value="gf23-{{$daftar->lomba->id}}-{{$daftar->id}}" value="{{$daftar->id ?? old('id')}}">
+                                <input name="id_daftar" @readonly(true) type="text" class="form-control" value="gf23-{{$daftar->lomba->id}}-{{$daftar->id}}">
                             </div>
                             <div class="form-group">
                                 <label>Lengkapi Format Berikut <span class="badge text-black">(Jangan Dihapus)</span></label>
