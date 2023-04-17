@@ -220,7 +220,7 @@
                             <div class="footer-pages-forms">
                                 <div class="content">
                                     <div class="links-clear-data">
-                                        <button type="button" id="saveonly" class="btn link-clear" data-bs-toggle="modal"
+                                        <button type="button" id="saveonly{{$daftar->id}}" class="btn link-clear" data-bs-toggle="modal"
                                             data-bs-dismiss="modal">
                                             <span>Save Saja</span>
                                         </button>
@@ -241,7 +241,7 @@
                                     </button>
                                     @endif
                                     <script>
-                                        document.querySelector('#saveonly').addEventListener('click', function() {
+                                        document.querySelector('#saveonly{{$daftar->id}}').addEventListener('click', function() {
                                             document.querySelector('input[name="saveonly"]').value = 1;
                                             document.getElementById('updateform{{$daftar->id}}').submit()
                                         });
