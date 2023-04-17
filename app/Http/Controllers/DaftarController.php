@@ -80,22 +80,14 @@ class DaftarController extends Controller
     {
         $daftar = Daftar::find($id);
 
-        if ($daftar->status_daftar == 'ditinjau') {
-            if ($r->saveonly == 0) {
-                $daftar->catatan = $r->catatan;
-
+        if ($r->saveonly == 0) {
+            if ($daftar->status_daftar == 'ditinjau') {
                 $daftar->status_daftar = 'diterima';
-            } else {
-                $daftar->catatan = $r->catatan;
-            }
-        } elseif ($daftar->status_daftar == 'diterima') {
-            if ($r->saveonly == 0) {
-                $daftar->catatan = $r->catatan;
-
+            } elseif ($daftar->status_daftar == 'diterima') {
                 $daftar->status_bayar = 1;
-            } else {
-                $daftar->catatan = $r->catatan;
             }
+            $daftar->catatan = $r->catatan;
+
         } else {
             $daftar->catatan = $r->catatan;
         }
