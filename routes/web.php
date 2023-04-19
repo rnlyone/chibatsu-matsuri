@@ -12,6 +12,7 @@ use App\Http\Controllers\SlideController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Models\Daftar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,11 @@ Route::group(['middleware'=>['auth']], function(){
         Route::resource('/ourblog', BlogController::class);
         Route::resource('/user', UserController::class);
         Route::resource('/ticketing', TicketController::class);
+        Route::resource('/daftar', DaftarController::class);
+
+        Route::post('/tolakdaftar/{id}', [DaftarController::class, 'tolak'])->name('daftar.tolak');
+        Route::post('/tinjaudaftar/{id}', [DaftarController::class, 'tinjau'])->name('daftar.tinjau');
+
 
     });
 

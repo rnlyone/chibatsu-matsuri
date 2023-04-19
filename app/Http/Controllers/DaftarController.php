@@ -96,6 +96,22 @@ class DaftarController extends Controller
         return back()->with('sukses', 'Yatta, Kamu Berhasil Update Catatan');
     }
 
+    public function tolak($id)
+    {
+        $daftar = Daftar::find($id);
+        $daftar->status_daftar = 'ditolak';
+        $daftar->save();
+        return back()->with('sukses', 'Yatta, Kamu Berhasil Update Pendaftaran');
+    }
+
+    public function tinjau($id)
+    {
+        $daftar = Daftar::find($id);
+        $daftar->status_daftar = 'ditinjau';
+        $daftar->save();
+        return back()->with('sukses', 'Yatta, Kamu Berhasil Update Pendaftaran');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -157,8 +173,11 @@ class DaftarController extends Controller
      * @param  \App\Models\Daftar  $daftar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Daftar $daftar)
+    public function destroy($daftar)
     {
-        //
+        $daftar = Daftar::find($daftar);
+
+        $daftar->delete();
+        return redirect()->back()->with('sukses', 'Berhasil Menghapus Pendaftar');
     }
 }

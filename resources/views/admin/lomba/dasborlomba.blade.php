@@ -130,7 +130,7 @@
                         <div class="body">
                             <div class="description">
                                 <p><span style="font-weight: 1000">Email : </span>{{$daftar->user->email}}</p>
-                                <p><span style="font-weight: 1000">Nomor Whatsapp : </span>{{$daftar->user->no_hp}}</p>
+                                <p><span style="font-weight: 1000">Nomor Whatsapp : </span><a href="https://api.whatsapp.com/send/?phone=62{{$daftar->user->no_hp}}" target="_blank" rel="noopener noreferrer">{{$daftar->user->no_hp}}</a></p>
                                 <p><span style="font-weight: 1000">Instansi : </span>{{$daftar->user->instansi}}</p>
                             </div>
 
@@ -176,6 +176,28 @@
                                 element.style.height = (element.scrollHeight) + "px";
                             }
                         </script>
+
+                        <form action="{{route('daftar.tolak', ['daftar' => $daftar->id])}}" method="post">
+                            @csrf
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menolak Pendaftaran ini?')" class="btn effect-click btn-md-size bg-warning text-white rounded-pill">
+                                Tolak Pendaftaran ini
+                            </button>
+                        </form>
+
+                        <form action="{{route('daftar.tinjau', ['daftar' => $daftar->id])}}" method="post">
+                            @csrf
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus Pendaftaran ini?')" class="btn effect-click btn-md-size bg-info text-white rounded-pill">
+                                Tinjau Ulang Pendaftaran
+                            </button>
+                        </form>
+
+                        <form action="{{route('daftar.destroy', ['daftar' => $daftar->id])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus Pendaftaran ini?')" class="btn effect-click btn-md-size bg-red text-white rounded-pill">
+                                Hapus Pendaftaran ini
+                            </button>
+                        </form>
 
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item">
