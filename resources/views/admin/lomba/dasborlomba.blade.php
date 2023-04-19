@@ -213,14 +213,14 @@
 
                         <form action="{{route('daftar.tolak', ['id' => $daftar->id])}}" method="post">
                             @csrf
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menolak Pendaftaran ini?')" class="btn effect-click btn-md-size bg-warning text-white rounded-pill">
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menolak Pendaftaran ini?')" class="btn effect-click btn-md-size bg-warning text-white rounded-pill" style="z-index: 0">
                                 Tolak Pendaftaran ini
                             </button>
                         </form>
 
                         <form action="{{route('daftar.tinjau', ['id' => $daftar->id])}}" method="post">
                             @csrf
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus Pendaftaran ini?')" class="btn effect-click btn-md-size bg-info text-white rounded-pill">
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin untuk Meninjau Ulang Pendaftaran ini?')" class="btn effect-click btn-md-size bg-info text-white rounded-pill" style="z-index: 0">
                                 Tinjau Ulang Pendaftaran
                             </button>
                         </form>
@@ -228,7 +228,7 @@
                         <form action="{{route('daftar.destroy', ['daftar' => $daftar->id])}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus Pendaftaran ini?')" class="btn effect-click btn-md-size bg-red text-white rounded-pill">
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus Pendaftaran ini?')" class="btn effect-click btn-md-size bg-red text-white rounded-pill" style="z-index: 0">
                                 Hapus Pendaftaran ini
                             </button>
                         </form>
