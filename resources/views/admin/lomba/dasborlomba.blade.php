@@ -77,6 +77,40 @@
     </div>
 </div>
 
+<div class="unList-creatores bg-white">
+    <div class="content-list-creatores">
+        <ul class="nav flex-column">
+            <h6 class="title-form">Ditolak</h6>
+            @php
+                $daftarDiterima = $lomba->daftars()->where('status_daftar', 'ditolak')->get();
+            @endphp
+            @foreach ($daftarDiterima as $daftar)
+                <li class="nav-item">
+                    <a data-bs-toggle="modal" data-bs-target="#mdllCollectibles{{$daftar->id}}" class="nav-link visited">
+                        <div class="item-user-img">
+                            <picture>
+                                <source srcset="/storage/public/avatar/{{$daftar->user->avatar}}" type="image/webp">
+                                <img class="avt-img" src="images/avatar/13.jpg" alt="">
+                            </picture>
+                            <div class="txt-user">
+                                <h5>{{$daftar->user->nama_lengkap}}</h5>
+                                <p>{{$daftar->user->username}} | No. ({{$daftar->id}})</p>
+                            </div>
+                        </div>
+                        <div class="other-option">
+                            @if ($daftar->status_bayar == '0')
+                                <div class="rounded-pill bg-danger btn-xs-size" style="color: white">Belum Bayar</div>
+                            @else
+                                <div class="rounded-pill bg-success btn-xs-size" style="color: white">Sudah Bayar</div>
+                            @endif
+                        </div>
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+
 
 @include('layouts.footer')
 
