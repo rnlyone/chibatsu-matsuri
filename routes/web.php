@@ -74,6 +74,8 @@ Route::group(['middleware'=>['auth']], function(){
 
         Route::post('/tolakdaftar/{id}', [DaftarController::class, 'tolak'])->name('daftar.tolak');
         Route::post('/tinjaudaftar/{id}', [DaftarController::class, 'tinjau'])->name('daftar.tinjau');
+        Route::post('/batalbayardaftar/{id}', [DaftarController::class, 'tinjau'])->name('daftar.batal.bayar');
+
 
 
     });

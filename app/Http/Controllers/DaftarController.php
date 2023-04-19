@@ -112,6 +112,14 @@ class DaftarController extends Controller
         return back()->with('sukses', 'Yatta, Kamu Berhasil Update Pendaftaran');
     }
 
+    public function batalbayar($id)
+    {
+        $daftar = Daftar::find($id);
+        $daftar->status_bayar = 0;
+        $daftar->save();
+        return back()->with('sukses', 'Yatta, Kamu Berhasil Update Pendaftaran');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

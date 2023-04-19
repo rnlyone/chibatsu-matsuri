@@ -211,19 +211,32 @@
                             }
                         </script>
 
+                        @if ($daftar->status_bayar == 1)
+                        <form action="{{route('daftar.batal.bayar', ['id' => $daftar->id])}}" method="post">
+                            @csrf
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin membatalkan pembayaran Pendaftaran ini?')" class="btn effect-click btn-md-size bg-info text-white rounded-pill" style="z-index: 0">
+                                Batalkan Pembayaran
+                            </button>
+                        </form>
+                        @endif
+
+                        @if ($daftar->status_daftar != 'ditolak')
                         <form action="{{route('daftar.tolak', ['id' => $daftar->id])}}" method="post">
                             @csrf
                             <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menolak Pendaftaran ini?')" class="btn effect-click btn-md-size bg-warning text-white rounded-pill" style="z-index: 0">
                                 Tolak Pendaftaran ini
                             </button>
                         </form>
+                        @endif
 
+                        @if ($daftar->status_daftar != 'ditinjau')
                         <form action="{{route('daftar.tinjau', ['id' => $daftar->id])}}" method="post">
                             @csrf
                             <button type="submit" onclick="return confirm('Apakah Anda yakin ingin untuk Meninjau Ulang Pendaftaran ini?')" class="btn effect-click btn-md-size bg-info text-white rounded-pill" style="z-index: 0">
                                 Tinjau Ulang Pendaftaran
                             </button>
                         </form>
+                        @endif
 
                         <form action="{{route('daftar.destroy', ['daftar' => $daftar->id])}}" method="post">
                             @csrf
@@ -274,6 +287,7 @@
                         <div class="space-sticky-footer mb-5 zindex-sticky"></div>
                         <div class="modal-footer justify-content-center border-0 pt-2">
                             <div class="footer-pages-forms">
+                                @if ($daftar->status_daftar != 'ditolak')
                                 <div class="content">
                                     <div class="links-clear-data">
                                         <button type="button" id="saveonly{{$daftar->id}}" class="btn link-clear" data-bs-toggle="modal"
@@ -303,6 +317,7 @@
                                         });
                                     </script>
                                 </div>
+                                @endif
                             </div>
                         </div>
                 </div>
