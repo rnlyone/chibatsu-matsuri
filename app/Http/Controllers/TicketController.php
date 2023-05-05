@@ -133,9 +133,9 @@ class TicketController extends Controller
         $ticket = Ticket::find($ticket);
         $customcss = '';
         $jmlsetting = Setting::where('group', 'env')->get();
-        $settings = ['title' => ': Buat Tiket',
+        $settings = ['title' => ': Show Tiket',
                      'customcss' => $customcss,
-                     'pagetitle' => 'Buat Tiket',
+                     'pagetitle' => 'Show Tiket',
                      'navactive' => '',
                      'baractive' => ''];
                     foreach ($jmlsetting as $i => $set) {

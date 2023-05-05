@@ -12,6 +12,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use League\Flysystem\Visibility;
 
 class GeneralController extends Controller
 {
@@ -94,7 +95,7 @@ class GeneralController extends Controller
                         $settings[$set->setname] = $set->value;
                     }
 
-        $lombas = Lomba::all();
+        $lombas = Lomba::where('visibility', 1)->get();
 
         if(Auth::check()){
             $user = User::find(auth()->user()->id);
@@ -150,7 +151,9 @@ class GeneralController extends Controller
     public function cast()
     {
         #page_setup
-        $customcss = '';
+        $customcss = '
+
+        ';
         $jmlsetting = Setting::where('group', 'env')->get();
         $settings = ['title' => ': gakuencast',
                      'customcss' => $customcss,

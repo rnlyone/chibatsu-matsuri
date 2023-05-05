@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 @include('layouts.header')
 @include('layouts.pagetitle')
 
@@ -25,6 +28,20 @@
                 </div>
             </div>
         </div>
+    @endif
+
+    @if (Auth::check())
+    <div class="discover-nft-random bg-white py-3">
+        <div class="content-NFTs-body">
+            <div class="item-card-nft">
+                <div id="tlkio" data-channel="gakuensailivechat" data-theme="theme--night" style="width:100%;height:300%;" css="https://raw.githubusercontent.com/rnlyone/haiternakweb/master/custom.css" data-nickname="@if (Auth::check())
+                {{auth()->user()->username}}
+            @else
+                anony
+            @endif" ></div><script async src="http://tlk.io/embed.js" type="text/javascript"></script>
+            </div>
+        </div>
+    </div>
     @endif
 
 <script>
