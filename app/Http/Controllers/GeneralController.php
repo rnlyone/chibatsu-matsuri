@@ -95,7 +95,7 @@ class GeneralController extends Controller
                         $settings[$set->setname] = $set->value;
                     }
 
-        $lombas = Lomba::where('visibility', 1)->get();
+        $lombas = Lomba::where('visibilitas', 1)->get();
 
         if(Auth::check()){
             $user = User::find(auth()->user()->id);
