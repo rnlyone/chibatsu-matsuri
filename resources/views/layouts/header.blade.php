@@ -17,8 +17,8 @@
             <header class="default heade-sticky">
                 <a href="/">
                     <div class="un-item-logo">
-                        <img class="logo-img light-mode" src="/images/gakuensai_b.svg" alt="">
-                        <img class="logo-img dark-mode" src="/images/gakuensai_white.svg" alt="">
+                        <img class="logo-img light-mode" src="/images/chibatsu_b.svg" alt="">
+                        <img class="logo-img dark-mode" src="/images/chibatsu_b.svg" alt="">
                     </div>
                 </a>
                 <div class="un-block-right">

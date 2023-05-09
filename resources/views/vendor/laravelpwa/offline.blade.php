@@ -11,10 +11,10 @@
     <!-- <meta name="theme-color" content="#ffffff"> -->
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#222032" media="(prefers-color-scheme: dark)">
-    <title>Gakuensai</title>
-    <meta name="description" content="Gakuensai">
+    <title>Chibatsu Matsuri</title>
+    <meta name="description" content="Chibatsu Matsuri">
     <meta name="keywords"
-        content="gakuensai, festival, expo, competition, pwa" />
+        content="chibatsu_matsuri, festival, expo, competition, pwa" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- FAVICON -->
     {{-- <link rel="icon" type="image/png" href="/images/favicon/icon-32x32.png" sizes="32x32">
@@ -70,8 +70,8 @@
             <header class="default heade-sticky">
                 <a href="/">
                     <div class="un-item-logo">
-                        <img class="logo-img light-mode" src="/images/gakuensai_b.svg" alt="">
-                        <img class="logo-img dark-mode" src="/images/gakuensai_white.svg" alt="">
+                        <img class="logo-img light-mode" src="/images/chibatsu_matsuri_b.svg" alt="">
+                        <img class="logo-img dark-mode" src="/images/chibatsu_matsuri_white.svg" alt="">
                     </div>
                 </a>
             </header>

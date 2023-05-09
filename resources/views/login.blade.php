@@ -5,7 +5,7 @@
         @if (Session::get('pesantix') == null)
             <h1>Irasshaimase!! 😆</h1>
         @endif
-        <p>Masuk dengan akun Gakuensai kamu disini</p>
+        <p>Masuk dengan akun Chibatsu Matsuri kamu disini</p>
     </div>
     <div class="connect-with-apps">
         <a href="{{route('auth.google')}}" class="google">

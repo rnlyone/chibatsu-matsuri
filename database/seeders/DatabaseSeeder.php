@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         Setting::create([
             'group' => 'env',
             'setname' => 'nama_aplikasi',
-            'value' => 'Gakuensai'
+            'value' => 'Chibatsu Matsuri'
         ]);
 
         Setting::create([

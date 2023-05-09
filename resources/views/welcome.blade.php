@@ -214,7 +214,7 @@
     <div class="un-title-default">
         <div class="text">
             <h2>Update Terbaru</h2>
-            <p>Lihat update informasi terbaru tentang Gakuensai 2023</p>
+            <p>Lihat update informasi terbaru tentang Chibatsu Matsuri 2023</p>
         </div>
         <div class="un-block-right">
             <a href="{{route('u.blog')}}" class="icon-back" aria-label="iconBtn">

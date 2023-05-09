@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Auth;
     <div class="discover-nft-random bg-white py-3">
         <div class="content-NFTs-body">
             <div class="item-card-nft">
-                <div id="tlkio" data-channel="gakuensailivechat" data-theme="theme--night" style="width:100%;height:300%;" css="https://raw.githubusercontent.com/rnlyone/haiternakweb/master/custom.css" data-nickname="@if (Auth::check())
+                <div id="tlkio" data-channel="chibatsu_matsurilivechat" data-theme="theme--night" style="width:100%;height:300%;" css="https://raw.githubusercontent.com/rnlyone/haiternakweb/master/custom.css" data-nickname="@if (Auth::check())
                 {{auth()->user()->username}}
             @else
                 anony

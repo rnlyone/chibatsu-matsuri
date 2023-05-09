@@ -14,7 +14,7 @@
     <title>{{$stgs['nama_aplikasi']}} {{$stgs['title']}}</title>
     <meta name="description" content="{{$stgs['nama_aplikasi']}} : {{$stgs['title']}}">
     <meta name="keywords"
-        content="gakuensai, festival, expo, competition, pwa" />
+        content="chibatsu_matsuri, festival, expo, competition, pwa" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- FAVICON -->
     {{-- <link rel="icon" type="image/png" href="/images/favicon/icon-32x32.png" sizes="32x32">

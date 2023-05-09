@@ -38,7 +38,7 @@
             <div class="margin-t-20 un-title-default">
                 <div class="text">
                     <h2>Tiket</h2>
-                    <p> Beli Tiket Gakuensai Online </p>
+                    <p> Beli Tiket Chibatsu Matsuri Online </p>
                 </div>
             </div>
                 <div class="body p-0">
@@ -129,7 +129,7 @@
             <div class="margin-t-20 un-title-default">
                 <div class="text">
                     <h2>Transaksi</h2>
-                    <p> Daftar transaksi Tiket Gakuensai</p>
+                    <p> Daftar transaksi Tiket Chibatsu Matsuri</p>
                 </div>
             </div>
             <hr>
@@ -224,7 +224,7 @@
             <div class="margin-t-20 un-title-default">
                 <div class="text">
                     <h2>Tiket Saya</h2>
-                    <p> Daftar Tiket Gakuensai yang telah dibeli</p>
+                    <p> Daftar Tiket Chibatsu Matsuri yang telah dibeli</p>
                 </div>
             </div>
             <hr>

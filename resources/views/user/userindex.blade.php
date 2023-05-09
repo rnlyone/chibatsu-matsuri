@@ -92,7 +92,7 @@
         </div> --}}
         <div class="description">
             <p>
-                Gakuensai adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa ..
+                Chibatsu Matsuri adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa ..
                 <a class="read-more visited" data-bs-toggle="modal" data-bs-target="#mdllBioDetails">Read more</a>
             </p>
             @if (auth()->user()->no_hp == null || auth()->user()->instansi == null)
@@ -232,10 +232,10 @@
             </div>
             <div class="modal-body">
                 <div class="content-upload-item">
-                    <h2 class="size-16 weight-500 text-dark margin-b-10">Seputar Gakuensai</h2>
+                    <h2 class="size-16 weight-500 text-dark margin-b-10">Seputar Chibatsu Matsuri</h2>
                     <p>
-                        Secara etimologis, kata Gakuensai berasal dari Bahasa Jepang, dan terdiri dari dua kata, yaitu gakuen yang berarti sekolah, dan sai yang berarti festival. Secara istilah yang kami jabarkan, Gakuensai adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa sebuah festival Jepang yang melibatkan siswa dalam sekolah, luar sekolah, maupun dari instansi apapun. Gakuensai akan diisi dengan banyak runtutan acara, perlombaan, penampilan, dan juga stand-stand wirausaha dari SMA Negeri 5 sendiri. Gakuensai akan menjadi lapangan pengekspresian diri oleh semua orang yang mengikutinya, dan diperuntukkan agar dapat bermanfaat di semua aspek.
-                        Tujuan dari kegiatan Gakuensai adalah untuk memberikan kesempatan bagi siswa, masyarakat luar sekolah, dan instansi lain untuk berekspresi dan berkontribusi melalui berbagai kegiatan seperti perlombaan, penampilan, dan juga stand-stand wirausaha. Gakuensai juga bertujuan untuk menjadi lapangan bagi semua orang untuk berkembang dan bermanfaat dalam berbagai aspek, sehingga memperkaya hidup mereka dan memperluas wawasan dan pengalaman mereka.
+                        Secara etimologis, kata Chibatsu Matsuri berasal dari Bahasa Jepang, dan terdiri dari dua kata, yaitu gakuen yang berarti sekolah, dan sai yang berarti festival. Secara istilah yang kami jabarkan, Chibatsu Matsuri adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa sebuah festival Jepang yang melibatkan siswa dalam sekolah, luar sekolah, maupun dari instansi apapun. Chibatsu Matsuri akan diisi dengan banyak runtutan acara, perlombaan, penampilan, dan juga stand-stand wirausaha dari SMA Negeri 5 sendiri. Chibatsu Matsuri akan menjadi lapangan pengekspresian diri oleh semua orang yang mengikutinya, dan diperuntukkan agar dapat bermanfaat di semua aspek.
+                        Tujuan dari kegiatan Chibatsu Matsuri adalah untuk memberikan kesempatan bagi siswa, masyarakat luar sekolah, dan instansi lain untuk berekspresi dan berkontribusi melalui berbagai kegiatan seperti perlombaan, penampilan, dan juga stand-stand wirausaha. Chibatsu Matsuri juga bertujuan untuk menjadi lapangan bagi semua orang untuk berkembang dan bermanfaat dalam berbagai aspek, sehingga memperkaya hidup mereka dan memperluas wawasan dan pengalaman mereka.
                     </p>
 
                 </div>

@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'name' => 'Gakuensai',
+    'name' => 'Chibatsu Matsuri',
     'manifest' => [
-        'name' => env('APP_NAME', 'Gakuensai'),
-        'short_name' => 'Gakuensai',
+        'name' => env('APP_NAME', 'Chibatsu Matsuri'),
+        'short_name' => 'Chibatsu Matsuri',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#ffffff',
