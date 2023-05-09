@@ -4,14 +4,14 @@
     <div class="un-title-default">
         <div class="text">
             <h2>{{$stgs['pagetitle']}}</h2>
-            <p>Buat Tiket disini</p>
+            <p>Tiket yang terjual.</p>
         </div>
         <div class="un-block-right">
             <a href="{{route('scan')}}" class="icon-back visited  mx-3" aria-label="iconBtn">
                 <i class="ri-qr-scan-line"></i>
             </a>
-            <a href="{{route('ticketing.create')}}" class="icon-back visited" aria-label="iconBtn">
-                <i class="ri-add-line"></i>
+            <a href="{{route('ticketing.edit', ['ticketing' => $ticket->id])}}" class="icon-back visited" aria-label="iconBtn">
+                <i class="ri-pencil-line"></i>
             </a>
         </div>
     </div>

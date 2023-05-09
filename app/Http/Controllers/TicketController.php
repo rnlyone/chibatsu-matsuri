@@ -119,7 +119,25 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_tiket' => 'required|string',
+            'deskripsi_tiket' => 'required|string',
+            'harga' => 'required|numeric|min:0',
+            'harga_coret' => 'nullable|numeric|min:0',
+            'kuota' => 'required|integer|min:1',
+            'visibility' => 'nullable|boolean'
+        ]);
+
+        $ticket = new Ticket();
+        $ticket->nama_tiket = $validatedData['nama_tiket'];
+        $ticket->deskripsi_tiket = $validatedData['deskripsi_tiket'];
+        $ticket->harga = $validatedData['harga'];
+        $ticket->harga_coret = $validatedData['harga_coret'] ?? null;
+        $ticket->kuota = $validatedData['kuota'];
+        $ticket->visibility = $validatedData['visibility'] ?? true;
+        $ticket->save();
+
+        return redirect()->route('ticketing.index')->with('success', 'Ticket created successfully.');
     }
 
     /**
@@ -150,6 +168,7 @@ class TicketController extends Controller
 
         return view('admin.ticket.detailticket', [
             'customcss' => $customcss,
+            'ticket' => $ticket,
             'paidtix' => $paidtix,
             $settings['navactive'] => '-active-links',
             $settings['baractive'] => 'active',
@@ -163,9 +182,28 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ticket $ticket)
+    public function edit($ticket)
     {
-        //
+
+        $ticket = Ticket::find($ticket);
+        $customcss = '';
+        $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['title' => ': Edit Tiket',
+                     'customcss' => $customcss,
+                     'pagetitle' => 'Edit Tiket',
+                     'navactive' => '',
+                     'baractive' => ''];
+                    foreach ($jmlsetting as $i => $set) {
+                        $settings[$set->setname] = $set->value;
+                     }
+
+        return view('admin.ticket.buattiket', [
+            'customcss' => $customcss,
+            'ticket' => $ticket,
+            $settings['navactive'] => '-active-links',
+            $settings['baractive'] => 'active',
+            'stgs' => $settings,
+            ]);
     }
 
     /**
@@ -175,9 +213,28 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(Request $request, $ticket)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_tiket' => 'required|string',
+            'deskripsi_tiket' => 'required|string',
+            'harga' => 'required|numeric|min:0',
+            'harga_coret' => 'nullable|numeric|min:0',
+            'kuota' => 'required|integer|min:1',
+            'visibility' => 'nullable|boolean'
+        ]);
+
+        $ticket = Ticket::find($ticket);
+        $ticket->nama_tiket = $validatedData['nama_tiket'];
+        $ticket->deskripsi_tiket = $validatedData['deskripsi_tiket'];
+        $ticket->harga = $validatedData['harga'];
+        $ticket->harga_coret = $validatedData['harga_coret'] ?? null;
+        $ticket->kuota = $validatedData['kuota'];
+        $ticket->visibility = $validatedData['visibility'] ?? true;
+        $ticket->save();
+
+        return redirect()->route('ticketing.index')
+            ->with('success', 'Ticket Updated successfully.');
     }
 
     /**

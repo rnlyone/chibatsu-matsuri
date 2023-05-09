@@ -129,7 +129,7 @@
             <div class="margin-t-20 un-title-default">
                 <div class="text">
                     <h2>Transaksi</h2>
-                    <p> Daftar transaksi Tiket Gakuensai </p>
+                    <p> Daftar transaksi Tiket Gakuensai</p>
                 </div>
             </div>
             <hr>

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->foreignId('id_tim')->constrained('tims')->onDelete('cascade');
             $table->boolean('status_bayar');
-            $table->enum('status_daftar', ['ditolak', 'ditinjau', 'diterima']);
-            $table->text('catatan');
             $table->timestamps();
 
         });
