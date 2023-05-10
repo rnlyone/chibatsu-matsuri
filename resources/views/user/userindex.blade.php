@@ -234,10 +234,9 @@
                 <div class="content-upload-item">
                     <h2 class="size-16 weight-500 text-dark margin-b-10">Seputar Chibatsu Matsuri</h2>
                     <p>
-                        Secara etimologis, kata Chibatsu Matsuri berasal dari Bahasa Jepang, dan terdiri dari dua kata, yaitu gakuen yang berarti sekolah, dan sai yang berarti festival. Secara istilah yang kami jabarkan, Chibatsu Matsuri adalah kegiatan yang diselenggarakan oleh Smunel Japanese Community, berupa sebuah festival Jepang yang melibatkan siswa dalam sekolah, luar sekolah, maupun dari instansi apapun. Chibatsu Matsuri akan diisi dengan banyak runtutan acara, perlombaan, penampilan, dan juga stand-stand wirausaha dari SMA Negeri 5 sendiri. Chibatsu Matsuri akan menjadi lapangan pengekspresian diri oleh semua orang yang mengikutinya, dan diperuntukkan agar dapat bermanfaat di semua aspek.
-                        Tujuan dari kegiatan Chibatsu Matsuri adalah untuk memberikan kesempatan bagi siswa, masyarakat luar sekolah, dan instansi lain untuk berekspresi dan berkontribusi melalui berbagai kegiatan seperti perlombaan, penampilan, dan juga stand-stand wirausaha. Chibatsu Matsuri juga bertujuan untuk menjadi lapangan bagi semua orang untuk berkembang dan bermanfaat dalam berbagai aspek, sehingga memperkaya hidup mereka dan memperluas wawasan dan pengalaman mereka.
-                    </p>
+                        Event yang bertajuk Matsuri yang dikemas Pop Culture yang diselenggarakan 05 Mei sampai 04 Juni 2023. Chibatsu Matsuri sendiri memiliki kepanjangan dari Chibi Atsui no Matsuri yang bisa diartikan little Project dari Atsui no Matsuri yang ditargerkan di tahun 2024
 
+Chibatsu Matsuri diselenggarakan pada Mall yang terkenal di Makassar yakni Mall Panakukkang Square, Kota Makassar. Event Jejepangan Terbesar di Sulawesi ini membawakan beberapa Konten Nasional dan Lokal yakni Gakuensai Fest sebagai Mitra Event, Indonesia Cosplay Grand Prix Regional Makassar, Grand Final Freefire dan MLBB serta Cosplayer Rising Star.
                 </div>
 
             </div>

@@ -80,7 +80,7 @@ class OrderController extends Controller
 
         $adminfee = Setting::where('setname', 'biaya_admin')->first()->value;
                 // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'Mid-server-hOThKHukEZQlnuXhIU3CLT9N';
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = true;
         // Set sanitization on (default)
