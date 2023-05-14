@@ -32,7 +32,7 @@
                 <span class="badge bg-danger">ditolak</span>
             @endif
         </h6>
-        @if ($daftar->status_daftar == 'diterima')
+        {{-- @if ($daftar->status_daftar == 'diterima')
             <h6>Status Pembayaran :
                 @if ($daftar->status_bayar == '1')
                     <span class="badge bg-success">Sudah</span>
@@ -40,7 +40,7 @@
                     <span class="badge bg-danger">Belum</span>
                 @endif
             </h6>
-        @endif
+        @endif --}}
         <form action="{{route('updatelomba')}}" method="post" id="updateform">
             @csrf
             <div class="form-group">
