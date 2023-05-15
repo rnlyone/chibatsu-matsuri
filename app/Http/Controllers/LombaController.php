@@ -138,9 +138,12 @@ class LombaController extends Controller
                         $settings[$set->setname] = $set->value;
                      }
 
+        $totalPendaftar = $lomba->daftars->count();
+
         return view('admin.lomba.dasborlomba', [
             'customcss' => $customcss,
             'lomba' => $lomba,
+            'totalPendaftar' => $totalPendaftar,
             $settings['navactive'] => '-active-links',
             $settings['baractive'] => 'active',
             'stgs' => $settings,

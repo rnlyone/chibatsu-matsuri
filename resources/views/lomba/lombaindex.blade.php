@@ -159,12 +159,12 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingTwo">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#juknisaccordion" aria-expanded="false" aria-controls="juknisaccordion">
-                                            Juknis
+                                            Juknis & Kelengkapan Berkas
                                         </button>
                                     </h2>
                                     <div id="juknisaccordion" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <a href="{{$lomba->juknis}}">Klik Disini Untuk Mengakses Juknis</a>
+                                            <a href="{{$lomba->juknis}}">Klik Disini Untuk Mengupload Berkas</a>
                                         </div>
                                     </div>
                                 </div>
