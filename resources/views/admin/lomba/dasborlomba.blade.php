@@ -17,16 +17,6 @@
                     <div class="image-blog">
                         <div class="text-blog">
                             <h2>Total Pendaftar : {{$totalPendaftar}}</h2>
-                            <div class="others">
-                                <div class="time">
-                                    <i class="ri-time-line"></i>
-                                    <span>Latest : {{$lomba->daftars->latest()}}</span>
-                                </div>
-                                <div class="views">
-                                    <i class="ri-eye-line"></i>
-                                    <span>295 views</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </a>
